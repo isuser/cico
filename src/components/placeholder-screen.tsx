@@ -2,9 +2,17 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { BottomTabInset, Spacing } from '@/constants/theme';
+import { Spacing } from '@/constants/theme';
 
-export function TabPlaceholder({ title, subtitle }: { title: string; subtitle: string }) {
+export function PlaceholderScreen({
+  title,
+  subtitle,
+  bottomInset = 0,
+}: {
+  title: string;
+  subtitle: string;
+  bottomInset?: number;
+}) {
   return (
     <ThemedView style={{ flex: 1 }}>
       <SafeAreaView
@@ -14,7 +22,7 @@ export function TabPlaceholder({ title, subtitle }: { title: string; subtitle: s
           justifyContent: 'center',
           gap: Spacing.two,
           paddingHorizontal: Spacing.five,
-          paddingBottom: BottomTabInset,
+          paddingBottom: bottomInset,
         }}>
         <ThemedText type="subtitle">{title}</ThemedText>
         <ThemedText type="default" themeColor="textSecondary" style={{ textAlign: 'center' }}>
