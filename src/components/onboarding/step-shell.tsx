@@ -5,8 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Spacing } from '@/constants/theme';
-
-const ACCENT = '#0274DF';
+import { useTheme } from '@/hooks/use-theme';
 
 export function OnboardingStepShell({
   step,
@@ -31,6 +30,8 @@ export function OnboardingStepShell({
   nextDisabled?: boolean;
   nextLoading?: boolean;
 }) {
+  const theme = useTheme();
+
   return (
     <ThemedView style={{ flex: 1 }}>
       <SafeAreaView style={{ flex: 1 }}>
@@ -42,7 +43,9 @@ export function OnboardingStepShell({
           </ThemedText>
 
           <View style={{ gap: Spacing.two }}>
-            <ThemedText type="subtitle">{title}</ThemedText>
+            <ThemedText type="display" style={{ fontSize: 32, lineHeight: 38 }}>
+              {title}
+            </ThemedText>
             {subtitle ? (
               <ThemedText type="default" themeColor="textSecondary">
                 {subtitle}
@@ -71,7 +74,7 @@ export function OnboardingStepShell({
             style={({ pressed }) => [
               {
                 flex: 1,
-                backgroundColor: nextDisabled ? '#9CA3AF' : ACCENT,
+                backgroundColor: nextDisabled ? '#9CA3AF' : theme.accent,
                 paddingVertical: Spacing.three,
                 borderRadius: Spacing.three,
                 alignItems: 'center',
