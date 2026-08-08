@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { View } from 'react-native';
 
-import { FormField } from '@/components/onboarding/form-field';
+import { FormField } from '@/components/form-field';
 import { OptionCard } from '@/components/onboarding/option-card';
 import { OnboardingStepShell } from '@/components/onboarding/step-shell';
 import { ThemedText } from '@/components/themed-text';
