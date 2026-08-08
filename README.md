@@ -35,6 +35,7 @@ All dependencies are MIT licensed and free to use.
 ### Prerequisites
 
 - [Node.js](https://nodejs.org) 18+
+- [pnpm](https://pnpm.io/installation)
 - [Expo Go](https://expo.dev/go) app on your phone, or an iOS/Android simulator
 
 ### Setup
@@ -45,10 +46,10 @@ git clone https://github.com/isuser/cico.git
 cd cico
 
 # Install dependencies
-npm install
+pnpm install
 
 # Start the development server
-npm start
+pnpm start
 ```
 
 Then either:
@@ -58,10 +59,10 @@ Then either:
 ### Other scripts
 
 ```bash
-npm run ios      # open directly in the iOS simulator
-npm run android  # open directly in the Android emulator
-npm run web      # run in the browser
-npm run lint     # lint the project
+pnpm ios      # open directly in the iOS simulator
+pnpm android  # open directly in the Android emulator
+pnpm web      # run in the browser
+pnpm lint     # lint the project
 ```
 
 ## License
