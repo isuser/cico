@@ -1,10 +1,10 @@
-import { PlaceholderScreen } from '@/components/placeholder-screen';
+import { OnboardingWizard } from '@/components/onboarding/onboarding-wizard';
+import { OnboardingProvider } from '@/hooks/onboarding-context';
 
 export default function OnboardingScreen() {
   return (
-    <PlaceholderScreen
-      title="Welcome to CICO"
-      subtitle="Onboarding flow — coming soon: personal info, activity level, and your calorie goal."
-    />
+    <OnboardingProvider>
+      <OnboardingWizard />
+    </OnboardingProvider>
   );
 }
