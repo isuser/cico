@@ -44,3 +44,4 @@ example
 
 # project docs kept out of version control
 ignoreFolder/
+node_modules
