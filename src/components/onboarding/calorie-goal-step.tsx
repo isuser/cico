@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from 'react';
 
-import { FormField } from '@/components/onboarding/form-field';
+import { FormField } from '@/components/form-field';
 import { OnboardingStepShell } from '@/components/onboarding/step-shell';
 import { useOnboarding } from '@/hooks/onboarding-context';
 import { calculateSuggestedCalorieGoal } from '@/lib/calorieGoal';
