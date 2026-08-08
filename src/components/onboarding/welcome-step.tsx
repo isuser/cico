@@ -3,11 +3,12 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { Spacing } from '@/constants/theme';
-
-const ACCENT = '#0274DF';
+import { FontFamily, Spacing } from '@/constants/theme';
+import { useTheme } from '@/hooks/use-theme';
 
 export function WelcomeStep({ onNext }: { onNext: () => void }) {
+  const theme = useTheme();
+
   return (
     <ThemedView style={{ flex: 1 }}>
       <SafeAreaView
@@ -18,7 +19,9 @@ export function WelcomeStep({ onNext }: { onNext: () => void }) {
           gap: Spacing.four,
           paddingHorizontal: Spacing.five,
         }}>
-        <ThemedText type="title" style={{ textAlign: 'center' }}>
+        <ThemedText
+          type="title"
+          style={{ textAlign: 'center', fontFamily: FontFamily.extraBold, color: theme.accent }}>
           CICO
         </ThemedText>
         <ThemedText type="default" themeColor="textSecondary" style={{ textAlign: 'center' }}>
@@ -28,7 +31,7 @@ export function WelcomeStep({ onNext }: { onNext: () => void }) {
           onPress={onNext}
           style={({ pressed }) => [
             {
-              backgroundColor: ACCENT,
+              backgroundColor: theme.accent,
               paddingVertical: Spacing.three,
               paddingHorizontal: Spacing.six,
               borderRadius: Spacing.three,
