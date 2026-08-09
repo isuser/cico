@@ -1,6 +1,6 @@
 import type { SQLiteDatabase } from 'expo-sqlite';
 
-const DATABASE_VERSION = 1;
+const DATABASE_VERSION = 2;
 
 const CREATE_TABLES = `
 CREATE TABLE IF NOT EXISTS profile (
@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS foods (
   salt_g REAL,
   source TEXT NOT NULL CHECK (source IN ('custom', 'open_food_facts')),
   barcode TEXT,
+  reference_portion TEXT,
   fetched_at TEXT,
   created_at TEXT NOT NULL
 );
@@ -76,7 +77,12 @@ export async function migrateDbIfNeeded(db: SQLiteDatabase): Promise<void> {
 
   if (currentDbVersion === 0) {
     await db.execAsync(CREATE_TABLES);
-    currentDbVersion = 1;
+    currentDbVersion = 2;
+  }
+
+  if (currentDbVersion === 1) {
+    await db.execAsync('ALTER TABLE foods ADD COLUMN reference_portion TEXT');
+    currentDbVersion = 2;
   }
 
   await db.execAsync(`PRAGMA user_version = ${DATABASE_VERSION}`);
