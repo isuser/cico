@@ -1,6 +1,15 @@
 const DAY_MS = 24 * 60 * 60 * 1000;
 const WEEKDAY_LETTERS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 const WEEKDAY_SHORT = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const WEEKDAY_LONG = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+];
 const MONTH_SHORT = [
   'Jan',
   'Feb',
@@ -79,4 +88,18 @@ export function formatDayLabel(isoDate: string, todayIsoDate: string): string {
     return `Today · ${monthDay}`;
   }
   return `${WEEKDAY_SHORT[date.getDay()]} · ${monthDay}`;
+}
+
+/** "Today" for today, otherwise the full weekday name, e.g. "Wednesday". */
+export function formatDayTitle(isoDate: string, todayIsoDate: string): string {
+  if (isoDate === todayIsoDate) {
+    return 'Today';
+  }
+  return WEEKDAY_LONG[parseISODate(isoDate).getDay()];
+}
+
+/** "Friday, Aug 8" */
+export function formatFullDate(isoDate: string): string {
+  const date = parseISODate(isoDate);
+  return `${WEEKDAY_LONG[date.getDay()]}, ${MONTH_SHORT[date.getMonth()]} ${date.getDate()}`;
 }
