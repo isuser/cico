@@ -74,16 +74,13 @@ export function QuickAddModal({
             <Pressable
               onPress={handleSave}
               disabled={!isValid || saving}
-              style={({ pressed }) => [
-                {
-                  backgroundColor: isValid ? theme.accent : '#9CA3AF',
-                  paddingVertical: Spacing.three,
-                  borderRadius: Spacing.three,
-                  alignItems: 'center',
-                  marginTop: Spacing.two,
-                },
-                pressed && isValid && { opacity: 0.85 },
-              ]}>
+              style={{
+                backgroundColor: isValid ? theme.accent : '#9CA3AF',
+                paddingVertical: Spacing.three,
+                borderRadius: Spacing.three,
+                alignItems: 'center',
+                marginTop: Spacing.two,
+              }}>
               <ThemedText type="default" style={{ color: '#ffffff' }}>
                 {saving ? 'Saving…' : 'Add'}
               </ThemedText>

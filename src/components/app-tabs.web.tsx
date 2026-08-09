@@ -29,7 +29,7 @@ export default function AppTabs() {
 
 export function TabButton({ children, isFocused, ...props }: TabTriggerSlotProps) {
   return (
-    <Pressable {...props} style={({ pressed }) => pressed && styles.pressed}>
+    <Pressable {...props}>
       <ThemedView
         type={isFocused ? 'backgroundSelected' : 'backgroundElement'}
         style={styles.tabButtonView}>
@@ -76,9 +76,6 @@ const styles = StyleSheet.create({
   },
   brandText: {
     marginRight: 'auto',
-  },
-  pressed: {
-    opacity: 0.7,
   },
   tabButtonView: {
     paddingVertical: Spacing.one,

@@ -40,15 +40,12 @@ export function WeightLogCard({
       </View>
       <Pressable
         onPress={onAdd}
-        style={({ pressed }) => [
-          {
-            backgroundColor: theme.buttonSecondary,
-            paddingVertical: Spacing.two,
-            paddingHorizontal: Spacing.three,
-            borderRadius: Spacing.two,
-          },
-          pressed && { opacity: 0.7 },
-        ]}>
+        style={{
+          backgroundColor: theme.buttonSecondary,
+          paddingVertical: Spacing.two,
+          paddingHorizontal: Spacing.three,
+          borderRadius: Spacing.two,
+        }}>
         <ThemedText type="bold" style={{ color: theme.accent }}>
           + Add
         </ThemedText>

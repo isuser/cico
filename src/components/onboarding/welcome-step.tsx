@@ -29,20 +29,20 @@ export function WelcomeStep({ onNext }: { onNext: () => void }) {
         </ThemedText>
         <Pressable
           onPress={onNext}
-          style={({ pressed }) => [
-            {
-              backgroundColor: theme.accent,
-              paddingVertical: Spacing.three,
-              paddingHorizontal: Spacing.six,
-              borderRadius: Spacing.three,
-              marginTop: Spacing.four,
-            },
-            pressed && { opacity: 0.85 },
-          ]}>
+          style={{
+            backgroundColor: theme.accent,
+            paddingVertical: Spacing.three,
+            paddingHorizontal: Spacing.six,
+            borderRadius: Spacing.three,
+            marginTop: Spacing.four,
+          }}>
           <ThemedText type="default" style={{ color: '#ffffff' }}>
             Get Started
           </ThemedText>
         </Pressable>
+        <ThemedText type="label" themeColor="textSecondary">
+          No account required
+        </ThemedText>
       </SafeAreaView>
     </ThemedView>
   );
