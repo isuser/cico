@@ -71,16 +71,13 @@ export function OnboardingStepShell({
           <Pressable
             onPress={onNext}
             disabled={nextDisabled || nextLoading}
-            style={({ pressed }) => [
-              {
-                flex: 1,
-                backgroundColor: nextDisabled ? '#9CA3AF' : theme.accent,
-                paddingVertical: Spacing.three,
-                borderRadius: Spacing.three,
-                alignItems: 'center',
-              },
-              pressed && !nextDisabled && { opacity: 0.85 },
-            ]}>
+            style={{
+              flex: 1,
+              backgroundColor: nextDisabled ? '#9CA3AF' : theme.accent,
+              paddingVertical: Spacing.three,
+              borderRadius: Spacing.three,
+              alignItems: 'center',
+            }}>
             <ThemedText type="default" style={{ color: '#ffffff' }}>
               {nextLoading ? 'Saving…' : nextLabel}
             </ThemedText>
