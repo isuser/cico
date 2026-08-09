@@ -42,6 +42,8 @@ export interface Food {
   salt_g: number | null;
   source: FoodSource;
   barcode: string | null;
+  /** e.g. "1 bar (45g)" — informational only, shown at log time to help fill in grams. */
+  reference_portion: string | null;
   fetched_at: string | null;
   created_at: string;
 }

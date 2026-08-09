@@ -25,15 +25,24 @@ export async function searchFoodsLocal(db: SQLiteDatabase, query: string): Promi
   );
 }
 
+/** Most recently cached/custom foods, for the Add Food sheet's "Recent" section. */
+export async function getRecentFoods(db: SQLiteDatabase, limit = 10): Promise<Food[]> {
+  return db.getAllAsync<Food>('SELECT * FROM foods ORDER BY id DESC LIMIT $limit', {
+    $limit: limit,
+  });
+}
+
 /** Inserts a food (custom or Open Food Facts) and returns the full saved row. */
 export async function insertFood(db: SQLiteDatabase, food: FoodInput): Promise<Food> {
   const result = await db.runAsync(
     `INSERT INTO foods (
        name, calories_per_100g, protein_g, fat_g, saturated_fat_g, carbs_g,
-       sugar_g, fiber_g, sodium_mg, salt_g, source, barcode, fetched_at, created_at
+       sugar_g, fiber_g, sodium_mg, salt_g, source, barcode, reference_portion,
+       fetched_at, created_at
      ) VALUES (
        $name, $calories_per_100g, $protein_g, $fat_g, $saturated_fat_g, $carbs_g,
-       $sugar_g, $fiber_g, $sodium_mg, $salt_g, $source, $barcode, $fetched_at, $created_at
+       $sugar_g, $fiber_g, $sodium_mg, $salt_g, $source, $barcode, $reference_portion,
+       $fetched_at, $created_at
      )`,
     {
       $name: food.name,
@@ -48,6 +57,7 @@ export async function insertFood(db: SQLiteDatabase, food: FoodInput): Promise<F
       $salt_g: food.salt_g,
       $source: food.source,
       $barcode: food.barcode,
+      $reference_portion: food.reference_portion,
       $fetched_at: food.fetched_at,
       $created_at: new Date().toISOString(),
     }

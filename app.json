@@ -33,7 +33,13 @@
           "imageWidth": 76
         }
       ],
-      "expo-sqlite"
+      "expo-sqlite",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "CICO uses your camera to scan barcodes when adding a food."
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,
