@@ -33,7 +33,7 @@ export function MealSection({
     <View style={{ gap: Spacing.two }}>
       <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
         <View style={{ flexDirection: 'row', alignItems: 'baseline', gap: Spacing.two }}>
-          <ThemedText type="bold" style={{ fontSize: 16 }}>
+          <ThemedText type="bold" style={{ fontSize: 16, lineHeight: 20 }}>
             {MEAL_LABELS[mealType]}
           </ThemedText>
           {logs.length > 0 ? (
@@ -53,7 +53,7 @@ export function MealSection({
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-          <ThemedText type="bold" style={{ color: theme.accent, fontSize: 16 }}>
+          <ThemedText type="bold" style={{ color: theme.accent, fontSize: 16, lineHeight: 20 }}>
             +
           </ThemedText>
         </Pressable>

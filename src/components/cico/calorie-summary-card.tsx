@@ -24,7 +24,9 @@ export function CalorieSummaryCard({
           <ThemedText type="label" themeColor="textSecondary" style={{ textTransform: 'uppercase' }}>
             Consumed
           </ThemedText>
-          <ThemedText type="stat" style={{ fontSize: 40, color: theme.accent, marginTop: 2 }}>
+          <ThemedText
+            type="stat"
+            style={{ fontSize: 40, lineHeight: 48, letterSpacing: -0.8, color: theme.accent, marginTop: 2 }}>
             {consumed.toLocaleString()}
           </ThemedText>
         </View>
@@ -32,7 +34,9 @@ export function CalorieSummaryCard({
           <ThemedText type="label" themeColor="textSecondary" style={{ textTransform: 'uppercase' }}>
             Remaining
           </ThemedText>
-          <ThemedText type="stat" style={{ fontSize: 40, color: theme.success, marginTop: 2 }}>
+          <ThemedText
+            type="stat"
+            style={{ fontSize: 40, lineHeight: 48, letterSpacing: -0.8, color: theme.success, marginTop: 2 }}>
             {remaining.toLocaleString()}
           </ThemedText>
         </View>

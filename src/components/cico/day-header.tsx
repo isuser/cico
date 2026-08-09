@@ -26,7 +26,7 @@ export function DayHeader({
       </Pressable>
 
       <View style={{ alignItems: 'center' }}>
-        <ThemedText type="bold" style={{ fontSize: 18 }}>
+        <ThemedText type="bold" style={{ fontSize: 18, lineHeight: 22 }}>
           {formatDayTitle(date, todayIso)}
         </ThemedText>
         <ThemedText type="label" themeColor="textSecondary">
