@@ -1,6 +1,6 @@
 import type { SQLiteDatabase } from 'expo-sqlite';
 
-const DATABASE_VERSION = 3;
+const DATABASE_VERSION = 4;
 
 const CREATE_TABLES = `
 CREATE TABLE IF NOT EXISTS profile (
@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS profile (
   activity_level TEXT NOT NULL CHECK (activity_level IN ('sedentary', 'lightly_active', 'moderately_active', 'very_active')),
   units TEXT NOT NULL CHECK (units IN ('metric', 'imperial')),
   first_day_of_week TEXT NOT NULL DEFAULT 'monday' CHECK (first_day_of_week IN ('sunday', 'monday')),
+  language TEXT NOT NULL DEFAULT 'en' CHECK (language IN ('en', 'pt', 'es', 'fr')),
   created_at TEXT NOT NULL
 );
 
@@ -78,7 +79,7 @@ export async function migrateDbIfNeeded(db: SQLiteDatabase): Promise<void> {
 
   if (currentDbVersion === 0) {
     await db.execAsync(CREATE_TABLES);
-    currentDbVersion = 3;
+    currentDbVersion = 4;
   }
 
   if (currentDbVersion === 1) {
@@ -91,6 +92,13 @@ export async function migrateDbIfNeeded(db: SQLiteDatabase): Promise<void> {
       `ALTER TABLE profile ADD COLUMN first_day_of_week TEXT NOT NULL DEFAULT 'monday' CHECK (first_day_of_week IN ('sunday', 'monday'))`
     );
     currentDbVersion = 3;
+  }
+
+  if (currentDbVersion === 3) {
+    await db.execAsync(
+      `ALTER TABLE profile ADD COLUMN language TEXT NOT NULL DEFAULT 'en' CHECK (language IN ('en', 'pt', 'es', 'fr'))`
+    );
+    currentDbVersion = 4;
   }
 
   await db.execAsync(`PRAGMA user_version = ${DATABASE_VERSION}`);

@@ -8,6 +8,7 @@ import { ThemedView } from '@/components/themed-view';
 import { Spacing } from '@/constants/theme';
 import type { Units } from '@/db';
 import { useTheme } from '@/hooks/use-theme';
+import { useTranslation } from '@/i18n/context';
 import { lbsToKg } from '@/lib/units';
 
 export function WeightLogModal({
@@ -22,6 +23,7 @@ export function WeightLogModal({
   onSave: (weightKg: number) => Promise<void>;
 }) {
   const theme = useTheme();
+  const { t } = useTranslation();
   const [weight, setWeight] = useState('');
   const [saving, setSaving] = useState(false);
   const isValid = Number(weight) > 0;
@@ -50,9 +52,9 @@ export function WeightLogModal({
             padding: Spacing.four,
           }}>
           <SafeAreaView edges={['bottom']} style={{ gap: Spacing.three }}>
-            <ThemedText type="subtitle">Log your weight</ThemedText>
+            <ThemedText type="subtitle">{t('dashboard.weightModal.title')}</ThemedText>
             <FormField
-              label="Weight"
+              label={t('dashboard.weightModal.weightLabel')}
               value={weight}
               onChangeText={setWeight}
               keyboardType="decimal-pad"
@@ -71,12 +73,12 @@ export function WeightLogModal({
                 marginTop: Spacing.two,
               }}>
               <ThemedText type="default" style={{ color: '#ffffff' }}>
-                {saving ? 'Saving…' : 'Save'}
+                {saving ? t('common.saving') : t('common.save')}
               </ThemedText>
             </Pressable>
             <Pressable onPress={onClose} style={{ alignItems: 'center', paddingVertical: Spacing.two }}>
               <ThemedText type="default" themeColor="textSecondary">
-                Cancel
+                {t('common.cancel')}
               </ThemedText>
             </Pressable>
           </SafeAreaView>

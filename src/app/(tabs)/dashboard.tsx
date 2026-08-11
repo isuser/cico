@@ -13,10 +13,12 @@ import { BottomTabInset, Spacing } from '@/constants/theme';
 import { getProfile, upsertWeightLogForDate, useDatabase, type DayOfWeek, type Units } from '@/db';
 import { useTheme } from '@/hooks/use-theme';
 import { useWeekSummary } from '@/hooks/use-week-summary';
+import { useTranslation } from '@/i18n/context';
 import { addDays, formatWeekRange, startOfWeek, toISODate } from '@/lib/date';
 
 export default function DashboardScreen() {
   const theme = useTheme();
+  const { t } = useTranslation();
   const db = useDatabase();
   const today = useMemo(() => new Date(), []);
   const todayIso = toISODate(today);
@@ -75,7 +77,7 @@ export default function DashboardScreen() {
             paddingBottom: BottomTabInset + Spacing.four,
           }}>
           <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-            <ThemedText type="display">Dashboard</ThemedText>
+            <ThemedText type="display">{t('dashboard.title')}</ThemedText>
             <View style={{ flexDirection: 'row', alignItems: 'center', gap: Spacing.two }}>
               <Pressable onPress={() => setWeekStart((w) => addDays(w, -7))} hitSlop={8}>
                 <ThemedText type="default" themeColor="textSecondary">
@@ -83,7 +85,7 @@ export default function DashboardScreen() {
                 </ThemedText>
               </Pressable>
               <ThemedText type="small" themeColor="textSecondary">
-                {formatWeekRange(weekStart)}
+                {formatWeekRange(weekStart, t)}
               </ThemedText>
               <Pressable
                 onPress={() => canGoForward && setWeekStart((w) => addDays(w, 7))}

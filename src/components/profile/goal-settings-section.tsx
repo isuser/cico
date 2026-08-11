@@ -8,6 +8,7 @@ import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
 import type { ActivityLevel, Profile, ProfileInput } from '@/db';
 import { useTheme } from '@/hooks/use-theme';
+import { useTranslation } from '@/i18n/context';
 import { ACTIVITY_LEVEL_INFO, calculateSuggestedCalorieGoal } from '@/lib/calorieGoal';
 
 export function GoalSettingsSection({
@@ -18,6 +19,7 @@ export function GoalSettingsSection({
   onSave: (patch: Partial<ProfileInput>) => Promise<void>;
 }) {
   const theme = useTheme();
+  const { t } = useTranslation();
   const [activityLevel, setActivityLevel] = useState<ActivityLevel>(profile.activity_level);
   const [goal, setGoal] = useState(String(profile.calorie_goal));
   const [savingGoal, setSavingGoal] = useState(false);
@@ -55,14 +57,14 @@ export function GoalSettingsSection({
 
   return (
     <SectionCard
-      title="Goal settings"
-      subtitle={`Suggested ${suggestion.toLocaleString()} kcal/day, based on your info and activity level below. Doesn't change your goal automatically.`}>
+      title={t('profile.goalSettings.title')}
+      subtitle={t('profile.goalSettings.suggestion', { suggestion: suggestion.toLocaleString() })}>
       <View style={{ gap: Spacing.two }}>
         {ACTIVITY_LEVEL_INFO.map((option) => (
           <OptionCard
             key={option.value}
-            label={option.label}
-            description={option.description}
+            label={t(option.labelKey)}
+            description={t(option.descriptionKey)}
             selected={activityLevel === option.value}
             onPress={() => handleSelectActivity(option.value)}
           />
@@ -70,7 +72,7 @@ export function GoalSettingsSection({
       </View>
 
       <FormField
-        label="Daily calorie goal"
+        label={t('profile.goalSettings.goalLabel')}
         value={goal}
         onChangeText={setGoal}
         keyboardType="number-pad"
@@ -88,7 +90,7 @@ export function GoalSettingsSection({
           marginTop: Spacing.one,
         }}>
         <ThemedText type="default" style={{ color: '#ffffff' }}>
-          {savingGoal ? 'Saving…' : 'Save goal'}
+          {savingGoal ? t('common.saving') : t('profile.goalSettings.saveGoal')}
         </ThemedText>
       </Pressable>
     </SectionCard>

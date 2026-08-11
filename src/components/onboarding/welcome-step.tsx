@@ -5,9 +5,11 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { FontFamily, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
+import { useTranslation } from '@/i18n/context';
 
 export function WelcomeStep({ onNext }: { onNext: () => void }) {
   const theme = useTheme();
+  const { t } = useTranslation();
 
   return (
     <ThemedView style={{ flex: 1 }}>
@@ -25,7 +27,7 @@ export function WelcomeStep({ onNext }: { onNext: () => void }) {
           CICO
         </ThemedText>
         <ThemedText type="default" themeColor="textSecondary" style={{ textAlign: 'center' }}>
-          Simple, friction-free calorie tracking. No clutter, just calories.
+          {t('onboarding.welcome.subtitle')}
         </ThemedText>
         <Pressable
           onPress={onNext}
@@ -37,11 +39,11 @@ export function WelcomeStep({ onNext }: { onNext: () => void }) {
             marginTop: Spacing.four,
           }}>
           <ThemedText type="default" style={{ color: '#ffffff' }}>
-            Get Started
+            {t('onboarding.welcome.cta')}
           </ThemedText>
         </Pressable>
         <ThemedText type="label" themeColor="textSecondary">
-          No account required
+          {t('onboarding.welcome.noAccount')}
         </ThemedText>
       </SafeAreaView>
     </ThemedView>

@@ -5,6 +5,7 @@ import { Swipeable } from 'react-native-gesture-handler';
 import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
 import type { FoodLog } from '@/db';
+import { useTranslation } from '@/i18n/context';
 
 const DANGER = '#EF4444';
 
@@ -17,13 +18,18 @@ export function FoodEntryRow({
   onPress: () => void;
   onDelete: () => void;
 }) {
+  const { t } = useTranslation();
   const swipeableRef = useRef<Swipeable>(null);
 
   const confirmDelete = () => {
-    Alert.alert('Delete entry?', `Remove "${log.food_name}" from this meal.`, [
-      { text: 'Cancel', style: 'cancel', onPress: () => swipeableRef.current?.close() },
-      { text: 'Delete', style: 'destructive', onPress: onDelete },
-    ]);
+    Alert.alert(
+      t('cico.deleteEntry.title'),
+      t('cico.deleteEntry.message', { name: log.food_name }),
+      [
+        { text: t('common.cancel'), style: 'cancel', onPress: () => swipeableRef.current?.close() },
+        { text: t('common.delete'), style: 'destructive', onPress: onDelete },
+      ]
+    );
   };
 
   return (
@@ -39,7 +45,7 @@ export function FoodEntryRow({
             width: 88,
           }}>
           <ThemedText type="bold" style={{ color: '#ffffff' }}>
-            Delete
+            {t('common.delete')}
           </ThemedText>
         </Pressable>
       )}>
@@ -53,7 +59,7 @@ export function FoodEntryRow({
           }}>
           <ThemedText type="default">{log.food_name}</ThemedText>
           <ThemedText type="default" themeColor="textSecondary">
-            {log.calories} kcal
+            {t('cico.entryCalories', { calories: log.calories })}
           </ThemedText>
         </View>
       </Pressable>

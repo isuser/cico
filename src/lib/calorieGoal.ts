@@ -7,15 +7,27 @@ const ACTIVITY_MULTIPLIERS: Record<ActivityLevel, number> = {
   very_active: 1.725,
 };
 
-export const ACTIVITY_LEVEL_INFO: { value: ActivityLevel; label: string; description: string }[] = [
-  { value: 'sedentary', label: 'Sedentary', description: 'Little or no exercise' },
-  { value: 'lightly_active', label: 'Lightly Active', description: 'Light exercise 1–3 days a week' },
+export const ACTIVITY_LEVEL_INFO: { value: ActivityLevel; labelKey: string; descriptionKey: string }[] = [
+  {
+    value: 'sedentary',
+    labelKey: 'activityLevel.sedentary.label',
+    descriptionKey: 'activityLevel.sedentary.description',
+  },
+  {
+    value: 'lightly_active',
+    labelKey: 'activityLevel.lightlyActive.label',
+    descriptionKey: 'activityLevel.lightlyActive.description',
+  },
   {
     value: 'moderately_active',
-    label: 'Moderately Active',
-    description: 'Moderate exercise 3–5 days a week',
+    labelKey: 'activityLevel.moderatelyActive.label',
+    descriptionKey: 'activityLevel.moderatelyActive.description',
   },
-  { value: 'very_active', label: 'Very Active', description: 'Hard exercise 6–7 days a week' },
+  {
+    value: 'very_active',
+    labelKey: 'activityLevel.veryActive.label',
+    descriptionKey: 'activityLevel.veryActive.description',
+  },
 ];
 
 /** Mifflin-St Jeor equation. Height in cm, weight in kg. */

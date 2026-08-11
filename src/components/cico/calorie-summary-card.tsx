@@ -4,6 +4,7 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
+import { useTranslation } from '@/i18n/context';
 
 export function CalorieSummaryCard({
   consumed,
@@ -13,6 +14,7 @@ export function CalorieSummaryCard({
   calorieGoal: number | null;
 }) {
   const theme = useTheme();
+  const { t } = useTranslation();
   const goal = calorieGoal ?? 0;
   const remaining = goal - consumed;
   const pct = goal > 0 ? Math.min(100, Math.round((consumed / goal) * 100)) : 0;
@@ -22,7 +24,7 @@ export function CalorieSummaryCard({
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
         <View>
           <ThemedText type="label" themeColor="textSecondary" style={{ textTransform: 'uppercase' }}>
-            Consumed
+            {t('cico.consumed')}
           </ThemedText>
           <ThemedText
             type="stat"
@@ -32,7 +34,7 @@ export function CalorieSummaryCard({
         </View>
         <View style={{ alignItems: 'flex-end' }}>
           <ThemedText type="label" themeColor="textSecondary" style={{ textTransform: 'uppercase' }}>
-            Remaining
+            {t('cico.remaining')}
           </ThemedText>
           <ThemedText
             type="stat"
@@ -54,7 +56,7 @@ export function CalorieSummaryCard({
       </View>
 
       <ThemedText type="label" themeColor="textSecondary">
-        of {goal.toLocaleString()} kcal goal
+        {t('cico.ofGoal', { goal: goal.toLocaleString() })}
       </ThemedText>
     </ThemedView>
   );

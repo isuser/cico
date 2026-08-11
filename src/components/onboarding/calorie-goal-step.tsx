@@ -3,10 +3,12 @@ import { useEffect, useMemo } from 'react';
 import { FormField } from '@/components/form-field';
 import { OnboardingStepShell } from '@/components/onboarding/step-shell';
 import { useOnboarding } from '@/hooks/onboarding-context';
+import { useTranslation } from '@/i18n/context';
 import { calculateSuggestedCalorieGoal } from '@/lib/calorieGoal';
 
 export function CalorieGoalStep({ onNext, onBack }: { onNext: () => void; onBack: () => void }) {
   const { draft, update } = useOnboarding();
+  const { t } = useTranslation();
 
   const suggestion = useMemo(() => {
     if (!draft.gender || !draft.activityLevel) return null;
@@ -35,17 +37,17 @@ export function CalorieGoalStep({ onNext, onBack }: { onNext: () => void; onBack
     <OnboardingStepShell
       step={4}
       totalSteps={5}
-      title="Your calorie goal"
+      title={t('onboarding.calorieGoal.title')}
       subtitle={
         suggestion !== null
-          ? `Based on your info, we suggest ${suggestion} kcal/day (BMR × activity level). Adjust it if you'd like.`
-          : 'Set your daily calorie goal.'
+          ? t('onboarding.calorieGoal.suggestion', { suggestion })
+          : t('onboarding.calorieGoal.fallbackSubtitle')
       }
       onBack={onBack}
       onNext={onNext}
       nextDisabled={!(Number(draft.calorieGoal) > 0)}>
       <FormField
-        label="Daily calorie goal"
+        label={t('onboarding.calorieGoal.label')}
         value={draft.calorieGoal}
         onChangeText={(calorieGoal) => update({ calorieGoal, calorieGoalTouched: true })}
         keyboardType="number-pad"

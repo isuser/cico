@@ -1,0 +1,231 @@
+{
+  "common": {
+    "save": "Save",
+    "saving": "Saving…",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "ok": "OK"
+  },
+  "tabs": {
+    "dashboard": "Dashboard",
+    "cico": "CICO",
+    "profile": "Profile"
+  },
+  "gender": {
+    "female": "Female",
+    "male": "Male",
+    "other": "Other"
+  },
+  "units": {
+    "metric": "Metric",
+    "metricDescription": "kg, cm",
+    "imperial": "Imperial",
+    "imperialDescription": "lbs, ft/in"
+  },
+  "firstDayOfWeek": {
+    "monday": "Monday",
+    "sunday": "Sunday"
+  },
+  "mealTypes": {
+    "breakfast": "Breakfast",
+    "lunch": "Lunch",
+    "snacks": "Snacks",
+    "dinner": "Dinner"
+  },
+  "activityLevel": {
+    "sedentary": { "label": "Sedentary", "description": "Little or no exercise" },
+    "lightlyActive": { "label": "Lightly Active", "description": "Light exercise 1–3 days a week" },
+    "moderatelyActive": {
+      "label": "Moderately Active",
+      "description": "Moderate exercise 3–5 days a week"
+    },
+    "veryActive": { "label": "Very Active", "description": "Hard exercise 6–7 days a week" }
+  },
+  "date": {
+    "weekdayLetter": { "sun": "S", "mon": "M", "tue": "T", "wed": "W", "thu": "T", "fri": "F", "sat": "S" },
+    "weekdayShort": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat"
+    },
+    "weekdayLong": {
+      "sun": "Sunday",
+      "mon": "Monday",
+      "tue": "Tuesday",
+      "wed": "Wednesday",
+      "thu": "Thursday",
+      "fri": "Friday",
+      "sat": "Saturday"
+    },
+    "monthShort": {
+      "jan": "Jan",
+      "feb": "Feb",
+      "mar": "Mar",
+      "apr": "Apr",
+      "may": "May",
+      "jun": "Jun",
+      "jul": "Jul",
+      "aug": "Aug",
+      "sep": "Sep",
+      "oct": "Oct",
+      "nov": "Nov",
+      "dec": "Dec"
+    },
+    "today": "Today",
+    "todayLabel": "Today · {{monthDay}}",
+    "weekdayDateLabel": "{{weekday}} · {{monthDay}}"
+  },
+  "onboarding": {
+    "stepShell": {
+      "stepOf": "Step {{step}} of {{total}}",
+      "back": "Back",
+      "next": "Next"
+    },
+    "welcome": {
+      "title": "CICO",
+      "subtitle": "Simple, friction-free calorie tracking. No clutter, just calories.",
+      "cta": "Get Started",
+      "noAccount": "No account required"
+    },
+    "personalInfo": {
+      "title": "About you",
+      "name": "Name",
+      "namePlaceholder": "Jane Doe",
+      "gender": "Gender",
+      "age": "Age",
+      "agePlaceholder": "28",
+      "height": "Height",
+      "heightPlaceholder": "170",
+      "weight": "Current weight",
+      "weightPlaceholder": "70"
+    },
+    "activityLevel": {
+      "title": "Activity level",
+      "subtitle": "Only used to suggest a calorie goal on the next step."
+    },
+    "calorieGoal": {
+      "title": "Your calorie goal",
+      "suggestion": "Based on your info, we suggest {{suggestion}} kcal/day (BMR × activity level). Adjust it if you'd like.",
+      "fallbackSubtitle": "Set your daily calorie goal.",
+      "label": "Daily calorie goal"
+    },
+    "units": {
+      "title": "Units",
+      "subtitle": "Applies across the whole app. You can change this later in Profile.",
+      "finish": "Finish"
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "thisWeek": "This week",
+    "kcalLogged": "{{total}} kcal logged",
+    "weekAvg": "Week avg",
+    "weekAvgValue": "{{value}} kcal",
+    "vsGoal": "vs goal",
+    "vsGoalValue": "{{value}} kcal",
+    "emptyState": "Log meals to see your weekly trends",
+    "weightCard": {
+      "title": "Log this week’s weight",
+      "lastEntry": "Last: {{weight}} {{unit}} · {{date}}",
+      "neverPrompted": "Never prompted — always optional",
+      "add": "+ Add"
+    },
+    "weightModal": {
+      "title": "Log your weight",
+      "weightLabel": "Weight"
+    }
+  },
+  "cico": {
+    "consumed": "Consumed",
+    "remaining": "Remaining",
+    "ofGoal": "of {{goal}} kcal goal",
+    "editEntry": {
+      "amount": "Amount",
+      "caloriesPreview": "{{calories}} kcal"
+    },
+    "deleteEntry": {
+      "title": "Delete entry?",
+      "message": "Remove \"{{name}}\" from this meal."
+    },
+    "entryCalories": "{{calories}} kcal",
+    "mealSection": {
+      "emptyState": "Tap + to log your first meal",
+      "subtotal": "{{subtotal}} kcal"
+    }
+  },
+  "addFood": {
+    "productNotFound": {
+      "title": "Product not found",
+      "message": "This barcode isn't in Open Food Facts. Try adding it as a custom food."
+    },
+    "cannotLookup": {
+      "title": "Cannot look up product",
+      "message": "Check your connection."
+    },
+    "scanner": {
+      "title": "Scan Barcode",
+      "pointCamera": "Point your camera at a barcode",
+      "cameraNeeded": "Camera access is needed to scan barcodes",
+      "grantAccess": "Grant camera access",
+      "worksWith": "Works with EAN, UPC, and QR codes",
+      "enterManually": "Enter barcode manually"
+    },
+    "customFood": {
+      "title": "Custom Food",
+      "name": "Food name",
+      "namePlaceholder": "Homemade granola bar",
+      "caloriesLabel": "Calories per 100g",
+      "caloriesPlaceholder": "433",
+      "portionLabel": "Reference portion (optional)",
+      "portionPlaceholder": "1 bar (45g)",
+      "helpText": "This food is saved for reuse. When you log it, enter the grams you ate and calories are calculated automatically.",
+      "addTo": "Add to {{meal}}"
+    },
+    "portion": {
+      "title": "How much did you eat?",
+      "equation": "{{grams}}g = {{calories}} kcal",
+      "logTo": "Log to {{meal}}"
+    },
+    "search": {
+      "placeholder": "Search foods...",
+      "offlineBanner": "Online search unavailable. Check your connection.",
+      "addCustom": "Add custom food",
+      "addCustomPrompt": "+ Not what you're looking for? Add custom",
+      "openFoodFactsResults": { "one": "Open Food Facts · {{count}} result", "other": "Open Food Facts · {{count}} results" },
+      "recent": "Recent",
+      "caloriesPer100g": "{{calories}} kcal / 100g",
+      "addToMeal": "Add to {{meal}}"
+    }
+  },
+  "profile": {
+    "title": "Profile",
+    "personalInfo": {
+      "title": "Personal info",
+      "name": "Name",
+      "gender": "Gender",
+      "age": "Age",
+      "heightFeet": "Height (feet)",
+      "heightInches": "Height (inches)",
+      "height": "Height",
+      "weight": "Current weight"
+    },
+    "goalSettings": {
+      "title": "Goal settings",
+      "suggestion": "Suggested {{suggestion}} kcal/day, based on your info and activity level below. Doesn't change your goal automatically.",
+      "goalLabel": "Daily calorie goal",
+      "saveGoal": "Save goal"
+    },
+    "units": {
+      "title": "Units"
+    },
+    "appPreferences": {
+      "title": "App preferences",
+      "firstDayOfWeek": "First day of week",
+      "language": "Language"
+    }
+  }
+}

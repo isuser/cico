@@ -1,30 +1,21 @@
 import type { DayOfWeek } from '@/db';
+import type { TranslateFn } from '@/i18n/translate';
 
 const DAY_MS = 24 * 60 * 60 * 1000;
-const WEEKDAY_LETTERS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
-const WEEKDAY_SHORT = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-const WEEKDAY_LONG = [
-  'Sunday',
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
-];
-const MONTH_SHORT = [
-  'Jan',
-  'Feb',
-  'Mar',
-  'Apr',
-  'May',
-  'Jun',
-  'Jul',
-  'Aug',
-  'Sep',
-  'Oct',
-  'Nov',
-  'Dec',
+const WEEKDAY_KEYS = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+const MONTH_KEYS = [
+  'jan',
+  'feb',
+  'mar',
+  'apr',
+  'may',
+  'jun',
+  'jul',
+  'aug',
+  'sep',
+  'oct',
+  'nov',
+  'dec',
 ];
 
 /** YYYY-MM-DD in the device's local timezone (not UTC, so it matches what the user sees). */
@@ -68,15 +59,15 @@ export function getWeekDates(weekStart: Date): string[] {
   return Array.from({ length: 7 }, (_, i) => toISODate(addDays(weekStart, i)));
 }
 
-export function weekdayLetter(isoDate: string): string {
-  return WEEKDAY_LETTERS[parseISODate(isoDate).getDay()];
+export function weekdayLetter(isoDate: string, t: TranslateFn): string {
+  return t(`date.weekdayLetter.${WEEKDAY_KEYS[parseISODate(isoDate).getDay()]}`);
 }
 
 /** "Aug 5–11" or "Jul 29 – Aug 4" when the week spans two months. */
-export function formatWeekRange(weekStart: Date): string {
+export function formatWeekRange(weekStart: Date, t: TranslateFn): string {
   const weekEnd = addDays(weekStart, 6);
-  const startMonth = MONTH_SHORT[weekStart.getMonth()];
-  const endMonth = MONTH_SHORT[weekEnd.getMonth()];
+  const startMonth = t(`date.monthShort.${MONTH_KEYS[weekStart.getMonth()]}`);
+  const endMonth = t(`date.monthShort.${MONTH_KEYS[weekEnd.getMonth()]}`);
   if (startMonth === endMonth) {
     return `${startMonth} ${weekStart.getDate()}–${weekEnd.getDate()}`;
   }
@@ -84,25 +75,28 @@ export function formatWeekRange(weekStart: Date): string {
 }
 
 /** "Today · Aug 8" for today, otherwise "Thu · Aug 7". */
-export function formatDayLabel(isoDate: string, todayIsoDate: string): string {
+export function formatDayLabel(isoDate: string, todayIsoDate: string, t: TranslateFn): string {
   const date = parseISODate(isoDate);
-  const monthDay = `${MONTH_SHORT[date.getMonth()]} ${date.getDate()}`;
+  const monthDay = `${t(`date.monthShort.${MONTH_KEYS[date.getMonth()]}`)} ${date.getDate()}`;
   if (isoDate === todayIsoDate) {
-    return `Today · ${monthDay}`;
+    return t('date.todayLabel', { monthDay });
   }
-  return `${WEEKDAY_SHORT[date.getDay()]} · ${monthDay}`;
+  const weekday = t(`date.weekdayShort.${WEEKDAY_KEYS[date.getDay()]}`);
+  return t('date.weekdayDateLabel', { weekday, monthDay });
 }
 
 /** "Today" for today, otherwise the full weekday name, e.g. "Wednesday". */
-export function formatDayTitle(isoDate: string, todayIsoDate: string): string {
+export function formatDayTitle(isoDate: string, todayIsoDate: string, t: TranslateFn): string {
   if (isoDate === todayIsoDate) {
-    return 'Today';
+    return t('date.today');
   }
-  return WEEKDAY_LONG[parseISODate(isoDate).getDay()];
+  return t(`date.weekdayLong.${WEEKDAY_KEYS[parseISODate(isoDate).getDay()]}`);
 }
 
 /** "Friday, Aug 8" */
-export function formatFullDate(isoDate: string): string {
+export function formatFullDate(isoDate: string, t: TranslateFn): string {
   const date = parseISODate(isoDate);
-  return `${WEEKDAY_LONG[date.getDay()]}, ${MONTH_SHORT[date.getMonth()]} ${date.getDate()}`;
+  const weekday = t(`date.weekdayLong.${WEEKDAY_KEYS[date.getDay()]}`);
+  const month = t(`date.monthShort.${MONTH_KEYS[date.getMonth()]}`);
+  return `${weekday}, ${month} ${date.getDate()}`;
 }

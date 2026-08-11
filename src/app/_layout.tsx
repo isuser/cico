@@ -8,6 +8,7 @@ import { ThemedView } from '@/components/themed-view';
 import { DatabaseProvider } from '@/db';
 import { useFontsLoaded } from '@/hooks/use-fonts-loaded';
 import { ProfileGateProvider, useProfileGate } from '@/hooks/profile-gate';
+import { LanguageProvider } from '@/i18n/context';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -21,9 +22,11 @@ export default function RootLayout() {
         <AnimatedSplashOverlay />
         {fontsLoaded ? (
           <DatabaseProvider>
-            <ProfileGateProvider>
-              <RootNavigator />
-            </ProfileGateProvider>
+            <LanguageProvider>
+              <ProfileGateProvider>
+                <RootNavigator />
+              </ProfileGateProvider>
+            </LanguageProvider>
           </DatabaseProvider>
         ) : (
           <ThemedView style={{ flex: 1 }} />

@@ -4,6 +4,7 @@ import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
 import type { Units } from '@/db';
 import { useTheme } from '@/hooks/use-theme';
+import { useTranslation } from '@/i18n/context';
 import { formatDayLabel } from '@/lib/date';
 import { kgToLbsRounded } from '@/lib/units';
 
@@ -21,6 +22,7 @@ export function WeightLogCard({
   onAdd: () => void;
 }) {
   const theme = useTheme();
+  const { t } = useTranslation();
   const isImperial = units === 'imperial';
   const displayWeight =
     latestWeightKg !== null ? (isImperial ? kgToLbsRounded(latestWeightKg) : latestWeightKg) : null;
@@ -39,11 +41,15 @@ export function WeightLogCard({
         paddingHorizontal: Spacing.four,
       }}>
       <View style={{ flex: 1 }}>
-        <ThemedText type="bold">Log this week&rsquo;s weight</ThemedText>
+        <ThemedText type="bold">{t('dashboard.weightCard.title')}</ThemedText>
         <ThemedText type="label" themeColor="textSecondary" style={{ marginTop: 2 }}>
           {displayWeight !== null && latestWeightDate !== null
-            ? `Last: ${displayWeight} ${unitLabel} · ${formatDayLabel(latestWeightDate, todayIso)}`
-            : 'Never prompted — always optional'}
+            ? t('dashboard.weightCard.lastEntry', {
+                weight: displayWeight,
+                unit: unitLabel,
+                date: formatDayLabel(latestWeightDate, todayIso, t),
+              })
+            : t('dashboard.weightCard.neverPrompted')}
         </ThemedText>
       </View>
       <Pressable
@@ -55,7 +61,7 @@ export function WeightLogCard({
           borderRadius: Spacing.two,
         }}>
         <ThemedText type="bold" style={{ color: theme.accent }}>
-          + Add
+          {t('dashboard.weightCard.add')}
         </ThemedText>
       </Pressable>
     </View>

@@ -2,6 +2,7 @@ import { Pressable, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
+import { useTranslation } from '@/i18n/context';
 import { formatDayTitle, formatFullDate } from '@/lib/date';
 
 export function DayHeader({
@@ -15,6 +16,7 @@ export function DayHeader({
   onPrev: () => void;
   onNext: () => void;
 }) {
+  const { t } = useTranslation();
   const isToday = date === todayIso;
 
   return (
@@ -27,10 +29,10 @@ export function DayHeader({
 
       <View style={{ alignItems: 'center' }}>
         <ThemedText type="bold" style={{ fontSize: 18, lineHeight: 22 }}>
-          {formatDayTitle(date, todayIso)}
+          {formatDayTitle(date, todayIso, t)}
         </ThemedText>
         <ThemedText type="label" themeColor="textSecondary">
-          {formatFullDate(date)}
+          {formatFullDate(date, t)}
         </ThemedText>
       </View>
 

@@ -7,6 +7,7 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
+import { useTranslation } from '@/i18n/context';
 
 export function CustomFoodScreen({
   mealLabel,
@@ -18,6 +19,7 @@ export function CustomFoodScreen({
   onSubmit: (data: { name: string; caloriesPer100g: number; referencePortion: string | null }) => Promise<void>;
 }) {
   const theme = useTheme();
+  const { t } = useTranslation();
   const [name, setName] = useState('');
   const [caloriesPer100g, setCaloriesPer100g] = useState('');
   const [referencePortion, setReferencePortion] = useState('');
@@ -63,31 +65,31 @@ export function CustomFoodScreen({
             </ThemedText>
           </Pressable>
           <ThemedText type="bold" style={{ fontSize: 19 }}>
-            Custom Food
+            {t('addFood.customFood.title')}
           </ThemedText>
         </View>
 
         <View style={{ flex: 1, gap: Spacing.three }}>
           <FormField
-            label="Food name"
+            label={t('addFood.customFood.name')}
             value={name}
             onChangeText={setName}
-            placeholder="Homemade granola bar"
+            placeholder={t('addFood.customFood.namePlaceholder')}
             autoFocus
           />
           <FormField
-            label="Calories per 100g"
+            label={t('addFood.customFood.caloriesLabel')}
             value={caloriesPer100g}
             onChangeText={setCaloriesPer100g}
             keyboardType="number-pad"
-            placeholder="433"
+            placeholder={t('addFood.customFood.caloriesPlaceholder')}
             suffix="kcal"
           />
           <FormField
-            label="Reference portion (optional)"
+            label={t('addFood.customFood.portionLabel')}
             value={referencePortion}
             onChangeText={setReferencePortion}
-            placeholder="1 bar (45g)"
+            placeholder={t('addFood.customFood.portionPlaceholder')}
           />
           <View
             style={{
@@ -101,8 +103,7 @@ export function CustomFoodScreen({
               !
             </ThemedText>
             <ThemedText type="label" themeColor="textSecondary" style={{ flex: 1 }}>
-              This food is saved for reuse. When you log it, enter the grams you ate and calories
-              are calculated automatically.
+              {t('addFood.customFood.helpText')}
             </ThemedText>
           </View>
         </View>
@@ -117,7 +118,7 @@ export function CustomFoodScreen({
             alignItems: 'center',
           }}>
           <ThemedText type="default" style={{ color: '#ffffff' }}>
-            {saving ? 'Saving…' : `Add to ${mealLabel}`}
+            {saving ? t('common.saving') : t('addFood.customFood.addTo', { meal: mealLabel })}
           </ThemedText>
         </Pressable>
       </SafeAreaView>

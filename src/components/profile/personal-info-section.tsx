@@ -8,12 +8,13 @@ import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
 import type { Gender, Profile, ProfileInput } from '@/db';
 import { useTheme } from '@/hooks/use-theme';
+import { useTranslation } from '@/i18n/context';
 import { cmToFeetInches, feetInchesToCm, kgToLbsRounded, lbsToKg } from '@/lib/units';
 
-const GENDER_OPTIONS: { value: Gender; label: string }[] = [
-  { value: 'female', label: 'Female' },
-  { value: 'male', label: 'Male' },
-  { value: 'other', label: 'Other' },
+const GENDER_OPTIONS: { value: Gender; labelKey: string }[] = [
+  { value: 'female', labelKey: 'gender.female' },
+  { value: 'male', labelKey: 'gender.male' },
+  { value: 'other', labelKey: 'gender.other' },
 ];
 
 /**
@@ -28,6 +29,7 @@ export function PersonalInfoSection({
   onSave: (patch: Partial<ProfileInput>) => Promise<void>;
 }) {
   const theme = useTheme();
+  const { t } = useTranslation();
   const isImperial = profile.units === 'imperial';
 
   // Captured once at mount, in the same units as the editable fields below, so the dirty check
@@ -91,16 +93,21 @@ export function PersonalInfoSection({
   };
 
   return (
-    <SectionCard title="Personal info">
-      <FormField label="Name" value={name} onChangeText={setName} autoCapitalize="words" />
+    <SectionCard title={t('profile.personalInfo.title')}>
+      <FormField
+        label={t('profile.personalInfo.name')}
+        value={name}
+        onChangeText={setName}
+        autoCapitalize="words"
+      />
 
       <View style={{ gap: Spacing.one }}>
-        <ThemedText type="smallBold">Gender</ThemedText>
+        <ThemedText type="smallBold">{t('profile.personalInfo.gender')}</ThemedText>
         <View style={{ flexDirection: 'row', gap: Spacing.two }}>
           {GENDER_OPTIONS.map((option) => (
             <View key={option.value} style={{ flex: 1 }}>
               <OptionCard
-                label={option.label}
+                label={t(option.labelKey)}
                 selected={gender === option.value}
                 onPress={() => setGender(option.value)}
               />
@@ -109,13 +116,18 @@ export function PersonalInfoSection({
         </View>
       </View>
 
-      <FormField label="Age" value={age} onChangeText={setAge} keyboardType="number-pad" />
+      <FormField
+        label={t('profile.personalInfo.age')}
+        value={age}
+        onChangeText={setAge}
+        keyboardType="number-pad"
+      />
 
       {isImperial ? (
         <View style={{ flexDirection: 'row', gap: Spacing.two }}>
           <View style={{ flex: 1 }}>
             <FormField
-              label="Height (feet)"
+              label={t('profile.personalInfo.heightFeet')}
               value={heightFeet}
               onChangeText={setHeightFeet}
               keyboardType="number-pad"
@@ -124,7 +136,7 @@ export function PersonalInfoSection({
           </View>
           <View style={{ flex: 1 }}>
             <FormField
-              label="Height (inches)"
+              label={t('profile.personalInfo.heightInches')}
               value={heightInches}
               onChangeText={setHeightInches}
               keyboardType="number-pad"
@@ -134,7 +146,7 @@ export function PersonalInfoSection({
         </View>
       ) : (
         <FormField
-          label="Height"
+          label={t('profile.personalInfo.height')}
           value={heightCm}
           onChangeText={setHeightCm}
           keyboardType="decimal-pad"
@@ -143,7 +155,7 @@ export function PersonalInfoSection({
       )}
 
       <FormField
-        label="Current weight"
+        label={t('profile.personalInfo.weight')}
         value={isImperial ? weightLbs : weightKg}
         onChangeText={isImperial ? setWeightLbs : setWeightKg}
         keyboardType="decimal-pad"
@@ -161,7 +173,7 @@ export function PersonalInfoSection({
           marginTop: Spacing.one,
         }}>
         <ThemedText type="default" style={{ color: '#ffffff' }}>
-          {saving ? 'Saving…' : 'Save'}
+          {saving ? t('common.saving') : t('common.save')}
         </ThemedText>
       </Pressable>
     </SectionCard>

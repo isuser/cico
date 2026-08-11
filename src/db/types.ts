@@ -1,3 +1,5 @@
+import type { Language } from '@/i18n/types';
+
 export type Gender = 'male' | 'female' | 'other';
 
 export type ActivityLevel =
@@ -28,6 +30,7 @@ export interface Profile {
   activity_level: ActivityLevel;
   units: Units;
   first_day_of_week: DayOfWeek;
+  language: Language;
   created_at: string;
 }
 

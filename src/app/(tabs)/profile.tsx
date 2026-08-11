@@ -11,6 +11,7 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { BottomTabInset, Spacing } from '@/constants/theme';
 import { getProfile, saveProfile, useDatabase, type Profile, type ProfileInput } from '@/db';
+import { useTranslation } from '@/i18n/context';
 
 function toInput(profile: Profile): ProfileInput {
   const { id: _id, created_at: _created_at, ...input } = profile;
@@ -19,6 +20,7 @@ function toInput(profile: Profile): ProfileInput {
 
 export default function ProfileScreen() {
   const db = useDatabase();
+  const { t } = useTranslation();
   const [profile, setProfile] = useState<Profile | null>(null);
 
   useFocusEffect(
@@ -42,7 +44,7 @@ export default function ProfileScreen() {
             gap: Spacing.four,
             paddingBottom: BottomTabInset + Spacing.four,
           }}>
-          <ThemedText type="display">Profile</ThemedText>
+          <ThemedText type="display">{t('profile.title')}</ThemedText>
 
           {profile ? (
             <>
