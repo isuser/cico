@@ -8,6 +8,7 @@ import { ThemedView } from '@/components/themed-view';
 import { Spacing } from '@/constants/theme';
 import type { Food } from '@/db';
 import { useTheme } from '@/hooks/use-theme';
+import { useTranslation } from '@/i18n/context';
 
 export function PortionScreen({
   food,
@@ -21,6 +22,7 @@ export function PortionScreen({
   onLog: (grams: number, calories: number) => Promise<void>;
 }) {
   const theme = useTheme();
+  const { t } = useTranslation();
   const [grams, setGrams] = useState('');
   const [saving, setSaving] = useState(false);
 
@@ -72,7 +74,7 @@ export function PortionScreen({
         ) : null}
 
         <FormField
-          label="How much did you eat?"
+          label={t('addFood.portion.title')}
           value={grams}
           onChangeText={setGrams}
           keyboardType="decimal-pad"
@@ -82,7 +84,7 @@ export function PortionScreen({
 
         {previewCalories !== null ? (
           <ThemedText type="label" themeColor="textSecondary">
-            {gramsNumber}g = {previewCalories.toLocaleString()} kcal
+            {t('addFood.portion.equation', { grams: gramsNumber, calories: previewCalories.toLocaleString() })}
           </ThemedText>
         ) : null}
 
@@ -96,7 +98,7 @@ export function PortionScreen({
             alignItems: 'center',
           }}>
           <ThemedText type="default" style={{ color: '#ffffff' }}>
-            {saving ? 'Saving…' : `Log to ${mealLabel}`}
+            {saving ? t('common.saving') : t('addFood.portion.logTo', { meal: mealLabel })}
           </ThemedText>
         </Pressable>
       </SafeAreaView>

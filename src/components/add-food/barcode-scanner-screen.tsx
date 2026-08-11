@@ -6,6 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Spacing } from '@/constants/theme';
+import { useTranslation } from '@/i18n/context';
 
 export function BarcodeScannerScreen({
   onClose,
@@ -14,6 +15,7 @@ export function BarcodeScannerScreen({
   onClose: () => void;
   onScanned: (barcode: string) => void;
 }) {
+  const { t } = useTranslation();
   const [permission, requestPermission] = useCameraPermissions();
   const scannedRef = useRef(false);
 
@@ -53,7 +55,7 @@ export function BarcodeScannerScreen({
             </ThemedText>
           </Pressable>
           <ThemedText type="bold" style={{ color: '#ffffff' }}>
-            Scan Barcode
+            {t('addFood.scanner.title')}
           </ThemedText>
           <View style={{ width: 24 }} />
         </View>
@@ -61,8 +63,8 @@ export function BarcodeScannerScreen({
         <View style={{ alignItems: 'center', gap: Spacing.four }}>
           <ThemedText type="default" style={{ color: '#ffffff', textAlign: 'center' }}>
             {permission?.granted
-              ? 'Point your camera at a barcode'
-              : 'Camera access is needed to scan barcodes'}
+              ? t('addFood.scanner.pointCamera')
+              : t('addFood.scanner.cameraNeeded')}
           </ThemedText>
           {permission?.granted ? (
             <View style={{ width: 220, height: 140 }}>
@@ -81,7 +83,7 @@ export function BarcodeScannerScreen({
                 borderRadius: Spacing.three,
               }}>
               <ThemedText type="default" style={{ color: '#ffffff' }}>
-                Grant camera access
+                {t('addFood.scanner.grantAccess')}
               </ThemedText>
             </Pressable>
           )}
@@ -89,11 +91,11 @@ export function BarcodeScannerScreen({
 
         <View style={{ alignItems: 'center', gap: Spacing.three }}>
           <ThemedText type="label" style={{ color: '#B0A199' }}>
-            Works with EAN, UPC, and QR codes
+            {t('addFood.scanner.worksWith')}
           </ThemedText>
           <Pressable onPress={onClose}>
             <ThemedText type="bold" style={{ color: '#ffffff' }}>
-              Enter barcode manually
+              {t('addFood.scanner.enterManually')}
             </ThemedText>
           </Pressable>
         </View>

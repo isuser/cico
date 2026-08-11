@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
+import { useTranslation } from '@/i18n/context';
 import { formatDayLabel, weekdayLetter } from '@/lib/date';
 
 export function RecentDaysList({
@@ -17,6 +18,7 @@ export function RecentDaysList({
   calorieGoal: number | null;
 }) {
   const theme = useTheme();
+  const { t } = useTranslation();
   const daysWithData = [...weekDates].filter((date) => (dayTotals[date] ?? 0) > 0).reverse();
 
   if (daysWithData.length === 0) {
@@ -26,7 +28,7 @@ export function RecentDaysList({
   return (
     <View style={{ gap: Spacing.three }}>
       <ThemedText type="label" themeColor="textSecondary" style={{ textTransform: 'uppercase' }}>
-        This week
+        {t('dashboard.thisWeek')}
       </ThemedText>
       <View>
         {daysWithData.map((date, index) => {
@@ -56,14 +58,14 @@ export function RecentDaysList({
                   backgroundColor: isToday ? theme.accent : theme.backgroundElement,
                 }}>
                 <ThemedText type="smallBold" style={isToday ? { color: '#ffffff' } : undefined}>
-                  {weekdayLetter(date)}
+                  {weekdayLetter(date, t)}
                 </ThemedText>
               </View>
 
               <View style={{ flex: 1 }}>
-                <ThemedText type="bold">{formatDayLabel(date, todayIso)}</ThemedText>
+                <ThemedText type="bold">{formatDayLabel(date, todayIso, t)}</ThemedText>
                 <ThemedText type="label" themeColor="textSecondary" style={{ marginTop: 2 }}>
-                  {total.toLocaleString()} kcal logged
+                  {t('dashboard.kcalLogged', { total: total.toLocaleString() })}
                 </ThemedText>
               </View>
 

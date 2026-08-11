@@ -5,13 +5,8 @@ import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
 import type { FoodLog, MealType } from '@/db';
 import { useTheme } from '@/hooks/use-theme';
-
-const MEAL_LABELS: Record<MealType, string> = {
-  breakfast: 'Breakfast',
-  lunch: 'Lunch',
-  snacks: 'Snacks',
-  dinner: 'Dinner',
-};
+import { useTranslation } from '@/i18n/context';
+import { MEAL_TYPE_KEYS } from '@/lib/mealTypes';
 
 export function MealSection({
   mealType,
@@ -27,6 +22,7 @@ export function MealSection({
   onDelete: (log: FoodLog) => void;
 }) {
   const theme = useTheme();
+  const { t } = useTranslation();
   const subtotal = logs.reduce((sum, log) => sum + log.calories, 0);
 
   return (
@@ -34,11 +30,11 @@ export function MealSection({
       <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
         <View style={{ flexDirection: 'row', alignItems: 'baseline', gap: Spacing.two }}>
           <ThemedText type="bold" style={{ fontSize: 16, lineHeight: 20 }}>
-            {MEAL_LABELS[mealType]}
+            {t(MEAL_TYPE_KEYS[mealType])}
           </ThemedText>
           {logs.length > 0 ? (
             <ThemedText type="label" themeColor="textSecondary">
-              {subtotal.toLocaleString()} kcal
+              {t('cico.mealSection.subtotal', { subtotal: subtotal.toLocaleString() })}
             </ThemedText>
           ) : null}
         </View>
@@ -61,7 +57,7 @@ export function MealSection({
 
       {logs.length === 0 ? (
         <ThemedText type="label" themeColor="textSecondary">
-          Tap + to log your first meal
+          {t('cico.mealSection.emptyState')}
         </ThemedText>
       ) : (
         <View>

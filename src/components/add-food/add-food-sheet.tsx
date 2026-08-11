@@ -13,14 +13,9 @@ import {
   type Food,
   type MealType,
 } from '@/db';
+import { useTranslation } from '@/i18n/context';
+import { MEAL_TYPE_KEYS } from '@/lib/mealTypes';
 import { lookupBarcodeOpenFoodFacts, type OpenFoodFactsProduct } from '@/lib/open-food-facts';
-
-const MEAL_LABELS: Record<MealType, string> = {
-  breakfast: 'Breakfast',
-  lunch: 'Lunch',
-  snacks: 'Snacks',
-  dinner: 'Dinner',
-};
 
 type SheetView = 'search' | 'custom' | 'portion' | 'scanner';
 
@@ -36,6 +31,7 @@ export function AddFoodSheet({
   onLogged: () => void;
 }) {
   const db = useDatabase();
+  const { t } = useTranslation();
   const [view, setView] = useState<SheetView>('search');
   const [selectedFood, setSelectedFood] = useState<Food | null>(null);
 
@@ -50,7 +46,7 @@ export function AddFoodSheet({
     return null;
   }
 
-  const mealLabel = MEAL_LABELS[mealType];
+  const mealLabel = t(MEAL_TYPE_KEYS[mealType]);
 
   const cacheRemoteProduct = async (product: OpenFoodFactsProduct): Promise<Food> => {
     const existing = await findFoodByBarcode(db, product.barcode);
@@ -93,14 +89,14 @@ export function AddFoodSheet({
         await handleSelectRemote(product);
       } else {
         Alert.alert(
-          'Product not found',
-          "This barcode isn't in Open Food Facts. Try adding it as a custom food.",
-          [{ text: 'OK', onPress: () => setView('search') }]
+          t('addFood.productNotFound.title'),
+          t('addFood.productNotFound.message'),
+          [{ text: t('common.ok'), onPress: () => setView('search') }]
         );
       }
     } catch {
-      Alert.alert('Cannot look up product', 'Check your connection.', [
-        { text: 'OK', onPress: () => setView('search') },
+      Alert.alert(t('addFood.cannotLookup.title'), t('addFood.cannotLookup.message'), [
+        { text: t('common.ok'), onPress: () => setView('search') },
       ]);
     }
   };

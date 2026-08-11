@@ -1,0 +1,231 @@
+{
+  "common": {
+    "save": "Guardar",
+    "saving": "Guardando…",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "ok": "Aceptar"
+  },
+  "tabs": {
+    "dashboard": "Panel",
+    "cico": "CICO",
+    "profile": "Perfil"
+  },
+  "gender": {
+    "female": "Femenino",
+    "male": "Masculino",
+    "other": "Otro"
+  },
+  "units": {
+    "metric": "Métrico",
+    "metricDescription": "kg, cm",
+    "imperial": "Imperial",
+    "imperialDescription": "lbs, ft/in"
+  },
+  "firstDayOfWeek": {
+    "monday": "Lunes",
+    "sunday": "Domingo"
+  },
+  "mealTypes": {
+    "breakfast": "Desayuno",
+    "lunch": "Almuerzo",
+    "snacks": "Meriendas",
+    "dinner": "Cena"
+  },
+  "activityLevel": {
+    "sedentary": { "label": "Sedentario", "description": "Poco o ningún ejercicio" },
+    "lightlyActive": { "label": "Levemente activo", "description": "Ejercicio ligero 1–3 días a la semana" },
+    "moderatelyActive": {
+      "label": "Moderadamente activo",
+      "description": "Ejercicio moderado 3–5 días a la semana"
+    },
+    "veryActive": { "label": "Muy activo", "description": "Ejercicio intenso 6–7 días a la semana" }
+  },
+  "date": {
+    "weekdayLetter": { "sun": "D", "mon": "L", "tue": "M", "wed": "X", "thu": "J", "fri": "V", "sat": "S" },
+    "weekdayShort": {
+      "sun": "Dom",
+      "mon": "Lun",
+      "tue": "Mar",
+      "wed": "Mié",
+      "thu": "Jue",
+      "fri": "Vie",
+      "sat": "Sáb"
+    },
+    "weekdayLong": {
+      "sun": "Domingo",
+      "mon": "Lunes",
+      "tue": "Martes",
+      "wed": "Miércoles",
+      "thu": "Jueves",
+      "fri": "Viernes",
+      "sat": "Sábado"
+    },
+    "monthShort": {
+      "jan": "Ene",
+      "feb": "Feb",
+      "mar": "Mar",
+      "apr": "Abr",
+      "may": "May",
+      "jun": "Jun",
+      "jul": "Jul",
+      "aug": "Ago",
+      "sep": "Sep",
+      "oct": "Oct",
+      "nov": "Nov",
+      "dec": "Dic"
+    },
+    "today": "Hoy",
+    "todayLabel": "Hoy · {{monthDay}}",
+    "weekdayDateLabel": "{{weekday}} · {{monthDay}}"
+  },
+  "onboarding": {
+    "stepShell": {
+      "stepOf": "Paso {{step}} de {{total}}",
+      "back": "Atrás",
+      "next": "Siguiente"
+    },
+    "welcome": {
+      "title": "CICO",
+      "subtitle": "Seguimiento de calorías simple y sin complicaciones. Sin desorden, solo calorías.",
+      "cta": "Comenzar",
+      "noAccount": "No se requiere cuenta"
+    },
+    "personalInfo": {
+      "title": "Sobre ti",
+      "name": "Nombre",
+      "namePlaceholder": "María García",
+      "gender": "Género",
+      "age": "Edad",
+      "agePlaceholder": "28",
+      "height": "Altura",
+      "heightPlaceholder": "170",
+      "weight": "Peso actual",
+      "weightPlaceholder": "70"
+    },
+    "activityLevel": {
+      "title": "Nivel de actividad",
+      "subtitle": "Solo se usa para sugerir una meta de calorías en el siguiente paso."
+    },
+    "calorieGoal": {
+      "title": "Tu meta de calorías",
+      "suggestion": "Según tu información, sugerimos {{suggestion}} kcal/día (TMB × nivel de actividad). Ajústalo si lo deseas.",
+      "fallbackSubtitle": "Establece tu meta diaria de calorías.",
+      "label": "Meta diaria de calorías"
+    },
+    "units": {
+      "title": "Unidades",
+      "subtitle": "Se aplica a toda la aplicación. Puedes cambiarlo después en Perfil.",
+      "finish": "Finalizar"
+    }
+  },
+  "dashboard": {
+    "title": "Panel",
+    "thisWeek": "Esta semana",
+    "kcalLogged": "{{total}} kcal registradas",
+    "weekAvg": "Promedio semanal",
+    "weekAvgValue": "{{value}} kcal",
+    "vsGoal": "vs. meta",
+    "vsGoalValue": "{{value}} kcal",
+    "emptyState": "Registra comidas para ver tus tendencias semanales",
+    "weightCard": {
+      "title": "Registrar el peso de esta semana",
+      "lastEntry": "Último: {{weight}} {{unit}} · {{date}}",
+      "neverPrompted": "Nunca solicitado — siempre opcional",
+      "add": "+ Añadir"
+    },
+    "weightModal": {
+      "title": "Registra tu peso",
+      "weightLabel": "Peso"
+    }
+  },
+  "cico": {
+    "consumed": "Consumidas",
+    "remaining": "Restantes",
+    "ofGoal": "de {{goal}} kcal de la meta",
+    "editEntry": {
+      "amount": "Cantidad",
+      "caloriesPreview": "{{calories}} kcal"
+    },
+    "deleteEntry": {
+      "title": "¿Eliminar entrada?",
+      "message": "Quitar \"{{name}}\" de esta comida."
+    },
+    "entryCalories": "{{calories}} kcal",
+    "mealSection": {
+      "emptyState": "Toca + para registrar tu primera comida",
+      "subtotal": "{{subtotal}} kcal"
+    }
+  },
+  "addFood": {
+    "productNotFound": {
+      "title": "Producto no encontrado",
+      "message": "Este código de barras no está en Open Food Facts. Intenta añadirlo como alimento personalizado."
+    },
+    "cannotLookup": {
+      "title": "No se pudo consultar el producto",
+      "message": "Verifica tu conexión."
+    },
+    "scanner": {
+      "title": "Escanear código de barras",
+      "pointCamera": "Apunta la cámara a un código de barras",
+      "cameraNeeded": "Se necesita acceso a la cámara para escanear códigos de barras",
+      "grantAccess": "Conceder acceso a la cámara",
+      "worksWith": "Funciona con códigos EAN, UPC y QR",
+      "enterManually": "Introducir código manualmente"
+    },
+    "customFood": {
+      "title": "Alimento personalizado",
+      "name": "Nombre del alimento",
+      "namePlaceholder": "Barrita de granola casera",
+      "caloriesLabel": "Calorías por 100g",
+      "caloriesPlaceholder": "433",
+      "portionLabel": "Porción de referencia (opcional)",
+      "portionPlaceholder": "1 barrita (45g)",
+      "helpText": "Este alimento se guarda para reutilizarlo. Al registrarlo, introduce los gramos consumidos y las calorías se calcularán automáticamente.",
+      "addTo": "Añadir a {{meal}}"
+    },
+    "portion": {
+      "title": "¿Cuánto comiste?",
+      "equation": "{{grams}}g = {{calories}} kcal",
+      "logTo": "Registrar en {{meal}}"
+    },
+    "search": {
+      "placeholder": "Buscar alimentos...",
+      "offlineBanner": "Búsqueda en línea no disponible. Verifica tu conexión.",
+      "addCustom": "Añadir alimento personalizado",
+      "addCustomPrompt": "+ ¿No encuentras lo que buscas? Añadir personalizado",
+      "openFoodFactsResults": { "one": "Open Food Facts · {{count}} resultado", "other": "Open Food Facts · {{count}} resultados" },
+      "recent": "Recientes",
+      "caloriesPer100g": "{{calories}} kcal / 100g",
+      "addToMeal": "Añadir a {{meal}}"
+    }
+  },
+  "profile": {
+    "title": "Perfil",
+    "personalInfo": {
+      "title": "Información personal",
+      "name": "Nombre",
+      "gender": "Género",
+      "age": "Edad",
+      "heightFeet": "Altura (pies)",
+      "heightInches": "Altura (pulgadas)",
+      "height": "Altura",
+      "weight": "Peso actual"
+    },
+    "goalSettings": {
+      "title": "Configuración de meta",
+      "suggestion": "Sugerencia de {{suggestion}} kcal/día, según tu información y nivel de actividad a continuación. No cambia tu meta automáticamente.",
+      "goalLabel": "Meta diaria de calorías",
+      "saveGoal": "Guardar meta"
+    },
+    "units": {
+      "title": "Unidades"
+    },
+    "appPreferences": {
+      "title": "Preferencias de la aplicación",
+      "firstDayOfWeek": "Primer día de la semana",
+      "language": "Idioma"
+    }
+  }
+}

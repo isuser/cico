@@ -4,6 +4,7 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { FontFamily, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
+import { useTranslation } from '@/i18n/context';
 import { weekdayLetter } from '@/lib/date';
 
 const CHART_HEIGHT = 120;
@@ -23,6 +24,7 @@ export function WeeklyChart({
   calorieGoal: number | null;
 }) {
   const theme = useTheme();
+  const { t } = useTranslation();
   const daysWithData = weekDates.filter((date) => (dayTotals[date] ?? 0) > 0);
   const isEmpty = daysWithData.length === 0;
   const maxValue = Math.max(0, ...daysWithData.map((date) => dayTotals[date]));
@@ -66,7 +68,7 @@ export function WeeklyChart({
                 type="label"
                 themeColor={isToday ? undefined : 'textSecondary'}
                 style={isToday ? { color: theme.accent, fontFamily: FontFamily.bold } : undefined}>
-                {weekdayLetter(date)}
+                {weekdayLetter(date, t)}
               </ThemedText>
             </View>
           );
@@ -78,7 +80,7 @@ export function WeeklyChart({
           type="default"
           themeColor="textSecondary"
           style={{ textAlign: 'center', marginTop: Spacing.four }}>
-          Log meals to see your weekly trends
+          {t('dashboard.emptyState')}
         </ThemedText>
       ) : (
         <View
@@ -92,18 +94,18 @@ export function WeeklyChart({
           }}>
           <View>
             <ThemedText type="label" themeColor="textSecondary">
-              Week avg
+              {t('dashboard.weekAvg')}
             </ThemedText>
-            <ThemedText type="stat">{weekAvg.toLocaleString()} kcal</ThemedText>
+            <ThemedText type="stat">{t('dashboard.weekAvgValue', { value: weekAvg.toLocaleString() })}</ThemedText>
           </View>
           {vsGoal !== null ? (
             <View style={{ alignItems: 'flex-end' }}>
               <ThemedText type="label" themeColor="textSecondary">
-                vs goal
+                {t('dashboard.vsGoal')}
               </ThemedText>
               <ThemedText type="stat" style={{ color: vsGoal <= 0 ? theme.success : theme.accent }}>
                 {vsGoal > 0 ? '+' : ''}
-                {vsGoal.toLocaleString()} kcal
+                {t('dashboard.vsGoalValue', { value: vsGoal.toLocaleString() })}
               </ThemedText>
             </View>
           ) : null}

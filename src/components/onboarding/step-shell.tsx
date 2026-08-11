@@ -6,6 +6,7 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
+import { useTranslation } from '@/i18n/context';
 
 export function OnboardingStepShell({
   step,
@@ -15,7 +16,7 @@ export function OnboardingStepShell({
   children,
   onBack,
   onNext,
-  nextLabel = 'Next',
+  nextLabel,
   nextDisabled = false,
   nextLoading = false,
 }: {
@@ -31,6 +32,7 @@ export function OnboardingStepShell({
   nextLoading?: boolean;
 }) {
   const theme = useTheme();
+  const { t } = useTranslation();
 
   return (
     <ThemedView style={{ flex: 1 }}>
@@ -39,7 +41,7 @@ export function OnboardingStepShell({
           contentContainerStyle={{ flexGrow: 1, padding: Spacing.four, gap: Spacing.four }}
           keyboardShouldPersistTaps="handled">
           <ThemedText type="small" themeColor="textSecondary">
-            Step {step} of {totalSteps}
+            {t('onboarding.stepShell.stepOf', { step, total: totalSteps })}
           </ThemedText>
 
           <View style={{ gap: Spacing.two }}>
@@ -65,7 +67,7 @@ export function OnboardingStepShell({
                 paddingVertical: Spacing.three,
                 paddingHorizontal: Spacing.four,
               }}>
-              <ThemedText type="default">Back</ThemedText>
+              <ThemedText type="default">{t('onboarding.stepShell.back')}</ThemedText>
             </Pressable>
           ) : null}
           <Pressable
@@ -79,7 +81,7 @@ export function OnboardingStepShell({
               alignItems: 'center',
             }}>
             <ThemedText type="default" style={{ color: '#ffffff' }}>
-              {nextLoading ? 'Saving…' : nextLabel}
+              {nextLoading ? t('common.saving') : (nextLabel ?? t('onboarding.stepShell.next'))}
             </ThemedText>
           </Pressable>
         </View>

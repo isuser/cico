@@ -8,6 +8,7 @@ import { ThemedView } from '@/components/themed-view';
 import { Spacing } from '@/constants/theme';
 import { getFoodById, useDatabase, type FoodLog } from '@/db';
 import { useTheme } from '@/hooks/use-theme';
+import { useTranslation } from '@/i18n/context';
 
 export function EditEntrySheet({
   log,
@@ -19,6 +20,7 @@ export function EditEntrySheet({
   onSave: (id: number, grams: number, calories: number) => Promise<void>;
 }) {
   const theme = useTheme();
+  const { t } = useTranslation();
   const db = useDatabase();
   const [grams, setGrams] = useState('');
   const [caloriesPer100g, setCaloriesPer100g] = useState<number | null>(null);
@@ -59,7 +61,7 @@ export function EditEntrySheet({
           <SafeAreaView edges={['bottom']} style={{ gap: Spacing.three }}>
             <ThemedText type="subtitle">{log?.food_name}</ThemedText>
             <FormField
-              label="Amount"
+              label={t('cico.editEntry.amount')}
               value={grams}
               onChangeText={setGrams}
               keyboardType="decimal-pad"
@@ -68,7 +70,7 @@ export function EditEntrySheet({
             />
             {previewCalories !== null ? (
               <ThemedText type="label" themeColor="textSecondary">
-                {previewCalories.toLocaleString()} kcal
+                {t('cico.editEntry.caloriesPreview', { calories: previewCalories.toLocaleString() })}
               </ThemedText>
             ) : null}
             <Pressable
@@ -82,12 +84,12 @@ export function EditEntrySheet({
                 marginTop: Spacing.two,
               }}>
               <ThemedText type="default" style={{ color: '#ffffff' }}>
-                {saving ? 'Saving…' : 'Save'}
+                {saving ? t('common.saving') : t('common.save')}
               </ThemedText>
             </Pressable>
             <Pressable onPress={onClose} style={{ alignItems: 'center', paddingVertical: Spacing.two }}>
               <ThemedText type="default" themeColor="textSecondary">
-                Cancel
+                {t('common.cancel')}
               </ThemedText>
             </Pressable>
           </SafeAreaView>

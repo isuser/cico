@@ -1,0 +1,231 @@
+{
+  "common": {
+    "save": "Enregistrer",
+    "saving": "Enregistrement…",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "ok": "OK"
+  },
+  "tabs": {
+    "dashboard": "Tableau de bord",
+    "cico": "CICO",
+    "profile": "Profil"
+  },
+  "gender": {
+    "female": "Femme",
+    "male": "Homme",
+    "other": "Autre"
+  },
+  "units": {
+    "metric": "Métrique",
+    "metricDescription": "kg, cm",
+    "imperial": "Impérial",
+    "imperialDescription": "lbs, ft/po"
+  },
+  "firstDayOfWeek": {
+    "monday": "Lundi",
+    "sunday": "Dimanche"
+  },
+  "mealTypes": {
+    "breakfast": "Petit-déjeuner",
+    "lunch": "Déjeuner",
+    "snacks": "Collations",
+    "dinner": "Dîner"
+  },
+  "activityLevel": {
+    "sedentary": { "label": "Sédentaire", "description": "Peu ou pas d'exercice" },
+    "lightlyActive": { "label": "Légèrement actif", "description": "Exercice léger 1 à 3 jours par semaine" },
+    "moderatelyActive": {
+      "label": "Modérément actif",
+      "description": "Exercice modéré 3 à 5 jours par semaine"
+    },
+    "veryActive": { "label": "Très actif", "description": "Exercice intense 6 à 7 jours par semaine" }
+  },
+  "date": {
+    "weekdayLetter": { "sun": "D", "mon": "L", "tue": "M", "wed": "M", "thu": "J", "fri": "V", "sat": "S" },
+    "weekdayShort": {
+      "sun": "Dim",
+      "mon": "Lun",
+      "tue": "Mar",
+      "wed": "Mer",
+      "thu": "Jeu",
+      "fri": "Ven",
+      "sat": "Sam"
+    },
+    "weekdayLong": {
+      "sun": "Dimanche",
+      "mon": "Lundi",
+      "tue": "Mardi",
+      "wed": "Mercredi",
+      "thu": "Jeudi",
+      "fri": "Vendredi",
+      "sat": "Samedi"
+    },
+    "monthShort": {
+      "jan": "Janv",
+      "feb": "Févr",
+      "mar": "Mars",
+      "apr": "Avr",
+      "may": "Mai",
+      "jun": "Juin",
+      "jul": "Juil",
+      "aug": "Août",
+      "sep": "Sept",
+      "oct": "Oct",
+      "nov": "Nov",
+      "dec": "Déc"
+    },
+    "today": "Aujourd'hui",
+    "todayLabel": "Aujourd'hui · {{monthDay}}",
+    "weekdayDateLabel": "{{weekday}} · {{monthDay}}"
+  },
+  "onboarding": {
+    "stepShell": {
+      "stepOf": "Étape {{step}} sur {{total}}",
+      "back": "Retour",
+      "next": "Suivant"
+    },
+    "welcome": {
+      "title": "CICO",
+      "subtitle": "Suivi des calories simple et sans friction. Pas de superflu, juste des calories.",
+      "cta": "Commencer",
+      "noAccount": "Aucun compte requis"
+    },
+    "personalInfo": {
+      "title": "À propos de vous",
+      "name": "Nom",
+      "namePlaceholder": "Marie Dupont",
+      "gender": "Genre",
+      "age": "Âge",
+      "agePlaceholder": "28",
+      "height": "Taille",
+      "heightPlaceholder": "170",
+      "weight": "Poids actuel",
+      "weightPlaceholder": "70"
+    },
+    "activityLevel": {
+      "title": "Niveau d'activité",
+      "subtitle": "Utilisé uniquement pour suggérer un objectif calorique à l'étape suivante."
+    },
+    "calorieGoal": {
+      "title": "Votre objectif calorique",
+      "suggestion": "D'après vos informations, nous suggérons {{suggestion}} kcal/jour (MB × niveau d'activité). Ajustez si vous le souhaitez.",
+      "fallbackSubtitle": "Définissez votre objectif calorique quotidien.",
+      "label": "Objectif calorique quotidien"
+    },
+    "units": {
+      "title": "Unités",
+      "subtitle": "S'applique à toute l'application. Vous pourrez modifier cela plus tard dans Profil.",
+      "finish": "Terminer"
+    }
+  },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "thisWeek": "Cette semaine",
+    "kcalLogged": "{{total}} kcal enregistrées",
+    "weekAvg": "Moyenne hebdo",
+    "weekAvgValue": "{{value}} kcal",
+    "vsGoal": "vs objectif",
+    "vsGoalValue": "{{value}} kcal",
+    "emptyState": "Enregistrez des repas pour voir vos tendances hebdomadaires",
+    "weightCard": {
+      "title": "Enregistrer le poids de cette semaine",
+      "lastEntry": "Dernier : {{weight}} {{unit}} · {{date}}",
+      "neverPrompted": "Jamais demandé — toujours facultatif",
+      "add": "+ Ajouter"
+    },
+    "weightModal": {
+      "title": "Enregistrer votre poids",
+      "weightLabel": "Poids"
+    }
+  },
+  "cico": {
+    "consumed": "Consommées",
+    "remaining": "Restantes",
+    "ofGoal": "sur {{goal}} kcal de l'objectif",
+    "editEntry": {
+      "amount": "Quantité",
+      "caloriesPreview": "{{calories}} kcal"
+    },
+    "deleteEntry": {
+      "title": "Supprimer l'entrée ?",
+      "message": "Retirer « {{name}} » de ce repas."
+    },
+    "entryCalories": "{{calories}} kcal",
+    "mealSection": {
+      "emptyState": "Appuyez sur + pour enregistrer votre premier repas",
+      "subtotal": "{{subtotal}} kcal"
+    }
+  },
+  "addFood": {
+    "productNotFound": {
+      "title": "Produit introuvable",
+      "message": "Ce code-barres ne figure pas dans Open Food Facts. Essayez de l'ajouter comme aliment personnalisé."
+    },
+    "cannotLookup": {
+      "title": "Impossible de consulter le produit",
+      "message": "Vérifiez votre connexion."
+    },
+    "scanner": {
+      "title": "Scanner un code-barres",
+      "pointCamera": "Pointez la caméra vers un code-barres",
+      "cameraNeeded": "L'accès à la caméra est nécessaire pour scanner des codes-barres",
+      "grantAccess": "Autoriser l'accès à la caméra",
+      "worksWith": "Fonctionne avec les codes EAN, UPC et QR",
+      "enterManually": "Saisir le code manuellement"
+    },
+    "customFood": {
+      "title": "Aliment personnalisé",
+      "name": "Nom de l'aliment",
+      "namePlaceholder": "Barre de céréales maison",
+      "caloriesLabel": "Calories pour 100g",
+      "caloriesPlaceholder": "433",
+      "portionLabel": "Portion de référence (facultatif)",
+      "portionPlaceholder": "1 barre (45g)",
+      "helpText": "Cet aliment est enregistré pour être réutilisé. Lorsque vous l'enregistrez, indiquez les grammes consommés et les calories sont calculées automatiquement.",
+      "addTo": "Ajouter à {{meal}}"
+    },
+    "portion": {
+      "title": "Combien avez-vous mangé ?",
+      "equation": "{{grams}}g = {{calories}} kcal",
+      "logTo": "Enregistrer dans {{meal}}"
+    },
+    "search": {
+      "placeholder": "Rechercher des aliments...",
+      "offlineBanner": "Recherche en ligne indisponible. Vérifiez votre connexion.",
+      "addCustom": "Ajouter un aliment personnalisé",
+      "addCustomPrompt": "+ Vous ne trouvez pas ce que vous cherchez ? Ajouter un aliment personnalisé",
+      "openFoodFactsResults": { "one": "Open Food Facts · {{count}} résultat", "other": "Open Food Facts · {{count}} résultats" },
+      "recent": "Récents",
+      "caloriesPer100g": "{{calories}} kcal / 100g",
+      "addToMeal": "Ajouter à {{meal}}"
+    }
+  },
+  "profile": {
+    "title": "Profil",
+    "personalInfo": {
+      "title": "Informations personnelles",
+      "name": "Nom",
+      "gender": "Genre",
+      "age": "Âge",
+      "heightFeet": "Taille (pieds)",
+      "heightInches": "Taille (pouces)",
+      "height": "Taille",
+      "weight": "Poids actuel"
+    },
+    "goalSettings": {
+      "title": "Objectif calorique",
+      "suggestion": "Suggestion de {{suggestion}} kcal/jour, basée sur vos informations et le niveau d'activité ci-dessous. Ne modifie pas votre objectif automatiquement.",
+      "goalLabel": "Objectif calorique quotidien",
+      "saveGoal": "Enregistrer l'objectif"
+    },
+    "units": {
+      "title": "Unités"
+    },
+    "appPreferences": {
+      "title": "Préférences de l'application",
+      "firstDayOfWeek": "Premier jour de la semaine",
+      "language": "Langue"
+    }
+  }
+}

@@ -8,15 +8,17 @@ import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
 import type { Gender } from '@/db';
 import { useOnboarding } from '@/hooks/onboarding-context';
+import { useTranslation } from '@/i18n/context';
 
-const GENDER_OPTIONS: { value: Gender; label: string }[] = [
-  { value: 'female', label: 'Female' },
-  { value: 'male', label: 'Male' },
-  { value: 'other', label: 'Other' },
+const GENDER_OPTIONS: { value: Gender; labelKey: string }[] = [
+  { value: 'female', labelKey: 'gender.female' },
+  { value: 'male', labelKey: 'gender.male' },
+  { value: 'other', labelKey: 'gender.other' },
 ];
 
 export function PersonalInfoStep({ onNext, onBack }: { onNext: () => void; onBack: () => void }) {
   const { draft, update } = useOnboarding();
+  const { t } = useTranslation();
 
   const isValid = useMemo(
     () =>
@@ -32,25 +34,25 @@ export function PersonalInfoStep({ onNext, onBack }: { onNext: () => void; onBac
     <OnboardingStepShell
       step={2}
       totalSteps={5}
-      title="About you"
+      title={t('onboarding.personalInfo.title')}
       onBack={onBack}
       onNext={onNext}
       nextDisabled={!isValid}>
       <FormField
-        label="Name"
+        label={t('onboarding.personalInfo.name')}
         value={draft.name}
         onChangeText={(name) => update({ name })}
-        placeholder="Jane Doe"
+        placeholder={t('onboarding.personalInfo.namePlaceholder')}
         autoCapitalize="words"
       />
 
       <View style={{ gap: Spacing.one }}>
-        <ThemedText type="smallBold">Gender</ThemedText>
+        <ThemedText type="smallBold">{t('onboarding.personalInfo.gender')}</ThemedText>
         <View style={{ flexDirection: 'row', gap: Spacing.two }}>
           {GENDER_OPTIONS.map((option) => (
             <View key={option.value} style={{ flex: 1 }}>
               <OptionCard
-                label={option.label}
+                label={t(option.labelKey)}
                 selected={draft.gender === option.value}
                 onPress={() => update({ gender: option.value })}
               />
@@ -60,26 +62,26 @@ export function PersonalInfoStep({ onNext, onBack }: { onNext: () => void; onBac
       </View>
 
       <FormField
-        label="Age"
+        label={t('onboarding.personalInfo.age')}
         value={draft.age}
         onChangeText={(age) => update({ age })}
         keyboardType="number-pad"
-        placeholder="28"
+        placeholder={t('onboarding.personalInfo.agePlaceholder')}
       />
       <FormField
-        label="Height"
+        label={t('onboarding.personalInfo.height')}
         value={draft.height}
         onChangeText={(height) => update({ height })}
         keyboardType="decimal-pad"
-        placeholder="170"
+        placeholder={t('onboarding.personalInfo.heightPlaceholder')}
         suffix="cm"
       />
       <FormField
-        label="Current weight"
+        label={t('onboarding.personalInfo.weight')}
         value={draft.weight}
         onChangeText={(weight) => update({ weight })}
         keyboardType="decimal-pad"
-        placeholder="70"
+        placeholder={t('onboarding.personalInfo.weightPlaceholder')}
         suffix="kg"
       />
     </OnboardingStepShell>

@@ -35,6 +35,7 @@ export function OnboardingWizard() {
         activity_level: draft.activityLevel,
         units: draft.units,
         first_day_of_week: 'monday',
+        language: 'en',
       });
       // Flips the onboarding gate — Stack.Protected then redirects to (tabs) automatically.
       await refresh();

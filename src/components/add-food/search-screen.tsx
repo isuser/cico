@@ -8,6 +8,7 @@ import { Spacing } from '@/constants/theme';
 import type { Food } from '@/db';
 import { useTheme } from '@/hooks/use-theme';
 import { useFoodSearch } from '@/hooks/use-food-search';
+import { useTranslation } from '@/i18n/context';
 import type { OpenFoodFactsProduct } from '@/lib/open-food-facts';
 
 export function SearchScreen({
@@ -26,6 +27,7 @@ export function SearchScreen({
   onSelectRemote: (product: OpenFoodFactsProduct) => void;
 }) {
   const theme = useTheme();
+  const { t } = useTranslation();
   const [query, setQuery] = useState('');
   const [bannerDismissed, setBannerDismissed] = useState(false);
   const { localResults, remoteResults, offline } = useFoodSearch(query);
@@ -50,7 +52,7 @@ export function SearchScreen({
         />
         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
           <ThemedText type="bold" style={{ fontSize: 19 }}>
-            Add to {mealLabel}
+            {t('addFood.search.addToMeal', { meal: mealLabel })}
           </ThemedText>
           <Pressable onPress={onClose} hitSlop={8}>
             <ThemedText type="default" themeColor="textSecondary">
@@ -71,7 +73,7 @@ export function SearchScreen({
           <TextInput
             value={query}
             onChangeText={setQuery}
-            placeholder="Search foods..."
+            placeholder={t('addFood.search.placeholder')}
             placeholderTextColor={theme.textSecondary}
             style={{ flex: 1, paddingVertical: Spacing.three, fontSize: 15, color: theme.text }}
           />
@@ -101,7 +103,7 @@ export function SearchScreen({
               padding: Spacing.two,
             }}>
             <ThemedText type="label" style={{ flex: 1 }}>
-              Online search unavailable. Check your connection.
+              {t('addFood.search.offlineBanner')}
             </ThemedText>
             <Pressable onPress={() => setBannerDismissed(true)} hitSlop={8}>
               <ThemedText type="label">✕</ThemedText>
@@ -134,18 +136,20 @@ export function SearchScreen({
               </ThemedText>
             </View>
             <ThemedText type="bold" style={{ color: theme.accent }}>
-              Add custom food
+              {t('addFood.search.addCustom')}
             </ThemedText>
           </Pressable>
         ) : (
           <ThemedText type="label" themeColor="textSecondary">
-            Open Food Facts · {remoteResults.length} results
+            {t('addFood.search.openFoodFactsResults', {
+              count: remoteResults.length,
+            })}
           </ThemedText>
         )}
 
         {!hasQuery && localResults.length > 0 ? (
           <ThemedText type="label" themeColor="textSecondary" style={{ textTransform: 'uppercase' }}>
-            Recent
+            {t('addFood.search.recent')}
           </ThemedText>
         ) : null}
 
@@ -154,7 +158,7 @@ export function SearchScreen({
             <FoodRow
               key={`local-${food.id}`}
               name={food.name}
-              sub={`${food.calories_per_100g} kcal / 100g`}
+              sub={t('addFood.search.caloriesPer100g', { calories: food.calories_per_100g })}
               onPress={() => onSelectLocal(food)}
             />
           ))}
@@ -162,7 +166,7 @@ export function SearchScreen({
             <FoodRow
               key={`remote-${product.barcode}`}
               name={product.name}
-              sub={`${product.caloriesPer100g} kcal / 100g`}
+              sub={t('addFood.search.caloriesPer100g', { calories: product.caloriesPer100g })}
               onPress={() => onSelectRemote(product)}
             />
           ))}
@@ -171,7 +175,7 @@ export function SearchScreen({
               onPress={onOpenCustom}
               style={{ paddingVertical: Spacing.three, alignItems: 'center' }}>
               <ThemedText type="bold" style={{ color: theme.accent }}>
-                + Not what you&rsquo;re looking for? Add custom
+                {t('addFood.search.addCustomPrompt')}
               </ThemedText>
             </Pressable>
           ) : null}
