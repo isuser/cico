@@ -6,14 +6,18 @@ import { FormField } from '@/components/form-field';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Spacing } from '@/constants/theme';
+import type { Units } from '@/db';
 import { useTheme } from '@/hooks/use-theme';
+import { lbsToKg } from '@/lib/units';
 
 export function WeightLogModal({
   visible,
+  units,
   onClose,
   onSave,
 }: {
   visible: boolean;
+  units: Units;
   onClose: () => void;
   onSave: (weightKg: number) => Promise<void>;
 }) {
@@ -21,12 +25,13 @@ export function WeightLogModal({
   const [weight, setWeight] = useState('');
   const [saving, setSaving] = useState(false);
   const isValid = Number(weight) > 0;
+  const isImperial = units === 'imperial';
 
   const handleSave = async () => {
     if (!isValid || saving) return;
     setSaving(true);
     try {
-      await onSave(Number(weight));
+      await onSave(isImperial ? lbsToKg(Number(weight)) : Number(weight));
       setWeight('');
       onClose();
     } finally {
@@ -51,8 +56,8 @@ export function WeightLogModal({
               value={weight}
               onChangeText={setWeight}
               keyboardType="decimal-pad"
-              placeholder="70"
-              suffix="kg"
+              placeholder={isImperial ? '154' : '70'}
+              suffix={isImperial ? 'lbs' : 'kg'}
               autoFocus
             />
             <Pressable
