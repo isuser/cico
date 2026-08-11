@@ -1,4 +1,5 @@
-import { useMemo, useState } from 'react';
+import { useFocusEffect } from 'expo-router';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Pressable, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -9,7 +10,7 @@ import { WeightLogModal } from '@/components/dashboard/weight-log-modal';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { BottomTabInset, Spacing } from '@/constants/theme';
-import { upsertWeightLogForDate, useDatabase } from '@/db';
+import { getProfile, upsertWeightLogForDate, useDatabase, type DayOfWeek } from '@/db';
 import { useTheme } from '@/hooks/use-theme';
 import { useWeekSummary } from '@/hooks/use-week-summary';
 import { addDays, formatWeekRange, startOfWeek, toISODate } from '@/lib/date';
@@ -19,7 +20,12 @@ export default function DashboardScreen() {
   const db = useDatabase();
   const today = useMemo(() => new Date(), []);
   const todayIso = toISODate(today);
-  const currentWeekStart = useMemo(() => startOfWeek(today), [today]);
+
+  const [firstDayOfWeek, setFirstDayOfWeek] = useState<DayOfWeek>('monday');
+  const currentWeekStart = useMemo(
+    () => startOfWeek(today, firstDayOfWeek),
+    [today, firstDayOfWeek]
+  );
 
   const [weekStart, setWeekStart] = useState(currentWeekStart);
   const [weightModalVisible, setWeightModalVisible] = useState(false);
@@ -28,6 +34,28 @@ export default function DashboardScreen() {
 
   const isCurrentWeek = weekStart.getTime() === currentWeekStart.getTime();
   const canGoForward = !isCurrentWeek;
+
+  // Re-checks the first-day-of-week preference on every focus, since it can change in the
+  // Profile tab while this screen stays mounted (native tabs don't unmount on switch).
+  useFocusEffect(
+    useCallback(() => {
+      getProfile(db).then((profile) => {
+        if (profile) setFirstDayOfWeek(profile.first_day_of_week);
+      });
+    }, [db])
+  );
+
+  // Keeps weekStart pinned to "current week" across a first-day-of-week change, without
+  // disturbing a user who has navigated to a past week.
+  const wasCurrentWeek = useRef(isCurrentWeek);
+  useEffect(() => {
+    if (wasCurrentWeek.current) {
+      setWeekStart(currentWeekStart);
+    }
+  }, [currentWeekStart]);
+  useEffect(() => {
+    wasCurrentWeek.current = isCurrentWeek;
+  });
 
   const handleSaveWeight = async (weightKg: number) => {
     await upsertWeightLogForDate(db, todayIso, weightKg);

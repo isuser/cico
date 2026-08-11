@@ -1,3 +1,5 @@
+import type { DayOfWeek } from '@/db';
+
 const DAY_MS = 24 * 60 * 60 * 1000;
 const WEEKDAY_LETTERS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 const WEEKDAY_SHORT = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -47,12 +49,13 @@ export function parseISODate(isoDate: string): Date {
   return new Date(year, month - 1, day);
 }
 
-/** Start of the Monday-based week containing `date`, per the Dashboard mockup (M–S columns). */
-export function startOfWeek(date: Date): Date {
+/** Start of the week containing `date`, per the profile's first-day-of-week preference (defaults to Monday, per the Dashboard mockup's M–S columns). */
+export function startOfWeek(date: Date, firstDay: DayOfWeek = 'monday'): Date {
   const result = new Date(date.getFullYear(), date.getMonth(), date.getDate());
   const day = result.getDay();
-  const diffToMonday = (day + 6) % 7;
-  result.setDate(result.getDate() - diffToMonday);
+  const offset = firstDay === 'monday' ? 1 : 0;
+  const diff = (day - offset + 7) % 7;
+  result.setDate(result.getDate() - diff);
   return result;
 }
 
