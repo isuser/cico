@@ -1,6 +1,8 @@
 # CICO
 
-**Calories In, Calories Out.** A simple, friction-free calorie tracking app for iOS and Android. Loosely inspired by Lose It, stripped down to the essentials — no clutter, just calories.
+**Calories In, Calories Out.** A simple, friction-free calorie tracking app for iOS and Android, stripped down to the essentials, no clutter, just calories.
+
+Built around one idea: no login or account required, works entirely offline, and has no ads. No user information is captured, shared, or sold to anyone.
 
 <p align="center">
   <img src="docs/screenshots/cico-tab.png" width="45%" alt="CICO daily log screen" />
@@ -9,12 +11,12 @@
 
 ## Features
 
-- **Daily logging** — log meals under Breakfast, Lunch, Snacks, and Dinner, with calories calculated automatically from portion size
-- **Food search & barcode scanning** — search Open Food Facts by name or scan a barcode; results are cached locally for instant future lookups
-- **Custom foods** — add your own foods with calories per 100g and a reference portion
-- **Weekly dashboard** — visual breakdown of calories consumed per day, with optional weight logging
-- **Personalized goals** — a suggested daily calorie target based on your stats (Mifflin-St Jeor BMR + activity level), fully overridable
-- **Local-first & offline** — no account required; all logging works fully offline, with graceful fallbacks when search is unavailable
+- **Daily logging** - log meals under Breakfast, Lunch, Snacks, and Dinner, with calories calculated automatically from portion size
+- **Food search & barcode scanning** - search Open Food Facts by name or scan a barcode, results are cached locally for instant future lookups
+- **Custom foods** - add your own foods with calories per 100g and a reference portion
+- **Weekly dashboard** - visual breakdown of calories consumed per day, with optional weight logging
+- **Personalized goals** - a suggested daily calorie target based on your stats (Mifflin-St Jeor BMR + activity level), fully overridable
+- **Local-first & offline** - no account required; all logging works fully offline, with graceful fallbacks when search is unavailable
 
 ## Tech Stack
 
@@ -67,4 +69,4 @@ pnpm lint     # lint the project
 
 ## License
 
-This project is licensed under the MIT License — see [LICENSE](LICENSE) for details.
+This project is licensed under the MIT License, see [LICENSE](LICENSE) for details.
