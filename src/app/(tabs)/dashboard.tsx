@@ -10,7 +10,7 @@ import { WeightLogModal } from '@/components/dashboard/weight-log-modal';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { BottomTabInset, Spacing } from '@/constants/theme';
-import { getProfile, upsertWeightLogForDate, useDatabase, type DayOfWeek } from '@/db';
+import { getProfile, upsertWeightLogForDate, useDatabase, type DayOfWeek, type Units } from '@/db';
 import { useTheme } from '@/hooks/use-theme';
 import { useWeekSummary } from '@/hooks/use-week-summary';
 import { addDays, formatWeekRange, startOfWeek, toISODate } from '@/lib/date';
@@ -22,6 +22,7 @@ export default function DashboardScreen() {
   const todayIso = toISODate(today);
 
   const [firstDayOfWeek, setFirstDayOfWeek] = useState<DayOfWeek>('monday');
+  const [units, setUnits] = useState<Units>('metric');
   const currentWeekStart = useMemo(
     () => startOfWeek(today, firstDayOfWeek),
     [today, firstDayOfWeek]
@@ -35,12 +36,14 @@ export default function DashboardScreen() {
   const isCurrentWeek = weekStart.getTime() === currentWeekStart.getTime();
   const canGoForward = !isCurrentWeek;
 
-  // Re-checks the first-day-of-week preference on every focus, since it can change in the
+  // Re-checks profile-derived preferences on every focus, since they can change in the
   // Profile tab while this screen stays mounted (native tabs don't unmount on switch).
   useFocusEffect(
     useCallback(() => {
       getProfile(db).then((profile) => {
-        if (profile) setFirstDayOfWeek(profile.first_day_of_week);
+        if (!profile) return;
+        setFirstDayOfWeek(profile.first_day_of_week);
+        setUnits(profile.units);
       });
     }, [db])
   );
@@ -110,6 +113,7 @@ export default function DashboardScreen() {
                   latestWeightKg={latestWeightKg}
                   latestWeightDate={latestWeightDate}
                   todayIso={todayIso}
+                  units={units}
                   onAdd={() => setWeightModalVisible(true)}
                 />
               ) : null}
@@ -127,6 +131,7 @@ export default function DashboardScreen() {
 
       <WeightLogModal
         visible={weightModalVisible}
+        units={units}
         onClose={() => setWeightModalVisible(false)}
         onSave={handleSaveWeight}
       />

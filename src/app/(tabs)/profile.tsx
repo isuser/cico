@@ -46,7 +46,7 @@ export default function ProfileScreen() {
 
           {profile ? (
             <>
-              <PersonalInfoSection profile={profile} onSave={handleSave} />
+              <PersonalInfoSection key={profile.units} profile={profile} onSave={handleSave} />
               <GoalSettingsSection profile={profile} onSave={handleSave} />
               <UnitsSection profile={profile} onSave={handleSave} />
               <AppPreferencesSection profile={profile} onSave={handleSave} />
