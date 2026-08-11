@@ -8,6 +8,8 @@ export type ActivityLevel =
 
 export type Units = 'metric' | 'imperial';
 
+export type DayOfWeek = 'sunday' | 'monday';
+
 export type MealType = 'breakfast' | 'lunch' | 'snacks' | 'dinner';
 
 export type FoodSource = 'custom' | 'open_food_facts';
@@ -25,6 +27,7 @@ export interface Profile {
   calorie_goal: number;
   activity_level: ActivityLevel;
   units: Units;
+  first_day_of_week: DayOfWeek;
   created_at: string;
 }
 
