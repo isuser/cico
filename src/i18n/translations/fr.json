@@ -154,6 +154,12 @@
     "weightModal": {
       "title": "Enregistrer votre poids",
       "weightLabel": "Poids"
+    },
+    "exercise": {
+      "title": "Exercice",
+      "weekTotal": "Total de la semaine",
+      "weekTotalValue": "{{value}} kcal brûlées",
+      "emptyState": "Enregistrez de l'exercice pour voir vos tendances hebdomadaires"
     }
   },
   "cico": {

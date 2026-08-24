@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Pressable, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { ExerciseWeeklyChart } from '@/components/dashboard/exercise-weekly-chart';
 import { RecentDaysList } from '@/components/dashboard/recent-days-list';
 import { WeeklyChart } from '@/components/dashboard/weekly-chart';
 import { WeightLogCard } from '@/components/dashboard/weight-log-card';
@@ -32,8 +33,16 @@ export default function DashboardScreen() {
 
   const [weekStart, setWeekStart] = useState(currentWeekStart);
   const [weightModalVisible, setWeightModalVisible] = useState(false);
-  const { loading, weekDates, dayTotals, calorieGoal, latestWeightKg, latestWeightDate, refresh } =
-    useWeekSummary(weekStart);
+  const {
+    loading,
+    weekDates,
+    dayTotals,
+    exerciseDayTotals,
+    calorieGoal,
+    latestWeightKg,
+    latestWeightDate,
+    refresh,
+  } = useWeekSummary(weekStart);
 
   const isCurrentWeek = weekStart.getTime() === currentWeekStart.getTime();
   const canGoForward = !isCurrentWeek;
@@ -108,6 +117,12 @@ export default function DashboardScreen() {
                 dayTotals={dayTotals}
                 todayIso={todayIso}
                 calorieGoal={calorieGoal}
+              />
+
+              <ExerciseWeeklyChart
+                weekDates={weekDates}
+                dayTotals={exerciseDayTotals}
+                todayIso={todayIso}
               />
 
               {isCurrentWeek ? (

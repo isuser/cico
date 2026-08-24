@@ -7,34 +7,32 @@ import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { useTranslation } from '@/i18n/context';
 
-export function WeeklyChart({
+export function ExerciseWeeklyChart({
   weekDates,
   dayTotals,
   todayIso,
-  calorieGoal,
 }: {
   weekDates: string[];
   dayTotals: Record<string, number>;
   todayIso: string;
-  calorieGoal: number | null;
 }) {
   const theme = useTheme();
   const { t } = useTranslation();
   const daysWithData = weekDates.filter((date) => (dayTotals[date] ?? 0) > 0);
   const isEmpty = daysWithData.length === 0;
-
-  const weekAvg = isEmpty
-    ? 0
-    : Math.round(daysWithData.reduce((sum, date) => sum + dayTotals[date], 0) / daysWithData.length);
-  const vsGoal = calorieGoal !== null ? weekAvg - calorieGoal : null;
+  const weekTotal = daysWithData.reduce((sum, date) => sum + dayTotals[date], 0);
 
   return (
     <ThemedView type="accentSoft" style={{ borderRadius: Spacing.five, padding: Spacing.three }}>
+      <ThemedText type="bold" style={{ fontSize: 16, lineHeight: 20, marginBottom: Spacing.three }}>
+        {t('dashboard.exercise.title')}
+      </ThemedText>
+
       <WeekBarChart
         weekDates={weekDates}
         dayTotals={dayTotals}
         todayIso={todayIso}
-        barColor={theme.accent}
+        barColor={theme.success}
       />
 
       {isEmpty ? (
@@ -42,35 +40,22 @@ export function WeeklyChart({
           type="default"
           themeColor="textSecondary"
           style={{ textAlign: 'center', marginTop: Spacing.four }}>
-          {t('dashboard.emptyState')}
+          {t('dashboard.exercise.emptyState')}
         </ThemedText>
       ) : (
         <View
           style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
             marginTop: Spacing.four,
             paddingTop: Spacing.three,
             borderTopWidth: 1,
             borderTopColor: theme.border,
           }}>
-          <View>
-            <ThemedText type="label" themeColor="textSecondary">
-              {t('dashboard.weekAvg')}
-            </ThemedText>
-            <ThemedText type="stat">{t('dashboard.weekAvgValue', { value: weekAvg.toLocaleString() })}</ThemedText>
-          </View>
-          {vsGoal !== null ? (
-            <View style={{ alignItems: 'flex-end' }}>
-              <ThemedText type="label" themeColor="textSecondary">
-                {t('dashboard.vsGoal')}
-              </ThemedText>
-              <ThemedText type="stat" style={{ color: vsGoal <= 0 ? theme.success : theme.accent }}>
-                {vsGoal > 0 ? '+' : ''}
-                {t('dashboard.vsGoalValue', { value: vsGoal.toLocaleString() })}
-              </ThemedText>
-            </View>
-          ) : null}
+          <ThemedText type="label" themeColor="textSecondary">
+            {t('dashboard.exercise.weekTotal')}
+          </ThemedText>
+          <ThemedText type="stat">
+            {t('dashboard.exercise.weekTotalValue', { value: weekTotal.toLocaleString() })}
+          </ThemedText>
         </View>
       )}
     </ThemedView>

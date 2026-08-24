@@ -154,6 +154,12 @@
     "weightModal": {
       "title": "Registrar seu peso",
       "weightLabel": "Peso"
+    },
+    "exercise": {
+      "title": "Exercício",
+      "weekTotal": "Total da semana",
+      "weekTotalValue": "{{value}} kcal queimadas",
+      "emptyState": "Registre exercícios para ver suas tendências semanais"
     }
   },
   "cico": {

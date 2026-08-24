@@ -154,6 +154,12 @@
     "weightModal": {
       "title": "Log your weight",
       "weightLabel": "Weight"
+    },
+    "exercise": {
+      "title": "Exercise",
+      "weekTotal": "Week total",
+      "weekTotalValue": "{{value}} kcal burned",
+      "emptyState": "Log exercise to see your weekly trends"
     }
   },
   "cico": {
