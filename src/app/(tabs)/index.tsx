@@ -15,6 +15,7 @@ import { BottomTabInset, Spacing } from '@/constants/theme';
 import {
   deleteExerciseLog,
   deleteFoodLog,
+  sumCaloriesBurned,
   updateExerciseLog,
   updateFoodLog,
   useDatabase,
@@ -42,6 +43,7 @@ export default function CicoScreen() {
   const [editingExerciseLog, setEditingExerciseLog] = useState<ExerciseLog | null>(null);
 
   const consumed = logs.reduce((sum, log) => sum + log.calories, 0);
+  const caloriesBurned = sumCaloriesBurned(exerciseLogs);
   const logsByMeal = MEAL_TYPES.reduce<Record<MealType, FoodLog[]>>(
     (acc, meal) => {
       acc[meal] = logs.filter((log) => log.meal_type === meal);
@@ -97,7 +99,11 @@ export default function CicoScreen() {
 
           {!loading && (
             <>
-              <CalorieSummaryCard consumed={consumed} calorieGoal={calorieGoal} />
+              <CalorieSummaryCard
+                consumed={consumed}
+                calorieGoal={calorieGoal}
+                caloriesBurned={caloriesBurned}
+              />
 
               {MEAL_TYPES.map((meal) => (
                 <MealSection

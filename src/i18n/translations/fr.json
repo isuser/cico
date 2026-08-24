@@ -160,6 +160,7 @@
     "consumed": "Consommées",
     "remaining": "Restantes",
     "ofGoal": "sur {{goal}} kcal de l'objectif",
+    "ofGoalWithExercise": "sur {{goal}} kcal de l'objectif + {{burned}} kcal d'exercice",
     "editEntry": {
       "amount": "Quantité",
       "caloriesPreview": "{{calories}} kcal"

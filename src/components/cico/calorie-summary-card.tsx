@@ -9,15 +9,18 @@ import { useTranslation } from '@/i18n/context';
 export function CalorieSummaryCard({
   consumed,
   calorieGoal,
+  caloriesBurned,
 }: {
   consumed: number;
   calorieGoal: number | null;
+  caloriesBurned: number;
 }) {
   const theme = useTheme();
   const { t } = useTranslation();
   const goal = calorieGoal ?? 0;
-  const remaining = goal - consumed;
-  const pct = goal > 0 ? Math.min(100, Math.round((consumed / goal) * 100)) : 0;
+  const effectiveGoal = goal + caloriesBurned;
+  const remaining = effectiveGoal - consumed;
+  const pct = effectiveGoal > 0 ? Math.min(100, Math.round((consumed / effectiveGoal) * 100)) : 0;
 
   return (
     <ThemedView type="accentSoft" style={{ borderRadius: Spacing.five, padding: Spacing.four, gap: Spacing.three }}>
@@ -56,7 +59,12 @@ export function CalorieSummaryCard({
       </View>
 
       <ThemedText type="label" themeColor="textSecondary">
-        {t('cico.ofGoal', { goal: goal.toLocaleString() })}
+        {caloriesBurned > 0
+          ? t('cico.ofGoalWithExercise', {
+              goal: goal.toLocaleString(),
+              burned: caloriesBurned.toLocaleString(),
+            })
+          : t('cico.ofGoal', { goal: goal.toLocaleString() })}
       </ThemedText>
     </ThemedView>
   );
