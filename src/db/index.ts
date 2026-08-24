@@ -4,3 +4,4 @@ export * from './profile';
 export * from './foods';
 export * from './foodLogs';
 export * from './weightLogs';
+export * from './exerciseLogs';

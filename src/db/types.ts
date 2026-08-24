@@ -74,3 +74,16 @@ export interface WeightLog {
   weight: number;
   created_at: string;
 }
+
+export interface ExerciseLog {
+  id: number;
+  /** YYYY-MM-DD */
+  date: string;
+  /** Denormalized snapshot from the Compendium entry, preserved if the dataset changes later. */
+  activity_name: string;
+  /** MET value used for the calculation, snapshotted at log time. */
+  met_value: number;
+  duration_minutes: number;
+  calories_burned: number;
+  created_at: string;
+}
