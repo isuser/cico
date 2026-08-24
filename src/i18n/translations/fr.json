@@ -33,16 +33,33 @@
     "dinner": "Dîner"
   },
   "activityLevel": {
-    "sedentary": { "label": "Sédentaire", "description": "Peu ou pas d'exercice" },
-    "lightlyActive": { "label": "Légèrement actif", "description": "Exercice léger 1 à 3 jours par semaine" },
+    "sedentary": {
+      "label": "Sédentaire",
+      "description": "Peu ou pas d'exercice"
+    },
+    "lightlyActive": {
+      "label": "Légèrement actif",
+      "description": "Exercice léger 1 à 3 jours par semaine"
+    },
     "moderatelyActive": {
       "label": "Modérément actif",
       "description": "Exercice modéré 3 à 5 jours par semaine"
     },
-    "veryActive": { "label": "Très actif", "description": "Exercice intense 6 à 7 jours par semaine" }
+    "veryActive": {
+      "label": "Très actif",
+      "description": "Exercice intense 6 à 7 jours par semaine"
+    }
   },
   "date": {
-    "weekdayLetter": { "sun": "D", "mon": "L", "tue": "M", "wed": "M", "thu": "J", "fri": "V", "sat": "S" },
+    "weekdayLetter": {
+      "sun": "D",
+      "mon": "L",
+      "tue": "M",
+      "wed": "M",
+      "thu": "J",
+      "fri": "V",
+      "sat": "S"
+    },
     "weekdayShort": {
       "sun": "Dim",
       "mon": "Lun",
@@ -155,7 +172,21 @@
     "mealSection": {
       "emptyState": "Appuyez sur + pour enregistrer votre premier repas",
       "subtotal": "{{subtotal}} kcal"
-    }
+    },
+    "exerciseSection": {
+      "title": "Exercice",
+      "emptyState": "Appuyez sur + pour enregistrer votre premier exercice",
+      "subtotal": "{{subtotal}} kcal brûlées"
+    },
+    "deleteExerciseEntry": {
+      "title": "Supprimer l'entrée ?",
+      "message": "Retirer « {{name}} » de l'exercice d'aujourd'hui."
+    },
+    "editExerciseEntry": {
+      "duration": "Durée (minutes)",
+      "caloriesPreview": "{{calories}} kcal brûlées"
+    },
+    "exerciseEntrySummary": "{{minutes}} min · {{calories}} kcal brûlées"
   },
   "addFood": {
     "productNotFound": {
@@ -195,10 +226,26 @@
       "offlineBanner": "Recherche en ligne indisponible. Vérifiez votre connexion.",
       "addCustom": "Ajouter un aliment personnalisé",
       "addCustomPrompt": "+ Vous ne trouvez pas ce que vous cherchez ? Ajouter un aliment personnalisé",
-      "openFoodFactsResults": { "one": "Open Food Facts · {{count}} résultat", "other": "Open Food Facts · {{count}} résultats" },
+      "openFoodFactsResults": {
+        "one": "Open Food Facts · {{count}} résultat",
+        "other": "Open Food Facts · {{count}} résultats"
+      },
       "recent": "Récents",
       "caloriesPer100g": "{{calories}} kcal / 100g",
       "addToMeal": "Ajouter à {{meal}}"
+    }
+  },
+  "addExercise": {
+    "search": {
+      "title": "Enregistrer un exercice",
+      "placeholder": "Rechercher des activités...",
+      "hint": "Commencez à taper pour rechercher des activités",
+      "noResults": "Aucune activité correspondante"
+    },
+    "duration": {
+      "title": "Combien de temps ?",
+      "equation": "{{minutes}} min = {{calories}} kcal brûlées",
+      "logButton": "Enregistrer l'exercice"
     }
   },
   "profile": {

@@ -33,16 +33,33 @@
     "dinner": "Dinner"
   },
   "activityLevel": {
-    "sedentary": { "label": "Sedentary", "description": "Little or no exercise" },
-    "lightlyActive": { "label": "Lightly Active", "description": "Light exercise 1–3 days a week" },
+    "sedentary": {
+      "label": "Sedentary",
+      "description": "Little or no exercise"
+    },
+    "lightlyActive": {
+      "label": "Lightly Active",
+      "description": "Light exercise 1–3 days a week"
+    },
     "moderatelyActive": {
       "label": "Moderately Active",
       "description": "Moderate exercise 3–5 days a week"
     },
-    "veryActive": { "label": "Very Active", "description": "Hard exercise 6–7 days a week" }
+    "veryActive": {
+      "label": "Very Active",
+      "description": "Hard exercise 6–7 days a week"
+    }
   },
   "date": {
-    "weekdayLetter": { "sun": "S", "mon": "M", "tue": "T", "wed": "W", "thu": "T", "fri": "F", "sat": "S" },
+    "weekdayLetter": {
+      "sun": "S",
+      "mon": "M",
+      "tue": "T",
+      "wed": "W",
+      "thu": "T",
+      "fri": "F",
+      "sat": "S"
+    },
     "weekdayShort": {
       "sun": "Sun",
       "mon": "Mon",
@@ -155,7 +172,21 @@
     "mealSection": {
       "emptyState": "Tap + to log your first meal",
       "subtotal": "{{subtotal}} kcal"
-    }
+    },
+    "exerciseSection": {
+      "title": "Exercise",
+      "emptyState": "Tap + to log your first exercise",
+      "subtotal": "{{subtotal}} kcal burned"
+    },
+    "deleteExerciseEntry": {
+      "title": "Delete entry?",
+      "message": "Remove \"{{name}}\" from today's exercise."
+    },
+    "editExerciseEntry": {
+      "duration": "Duration (minutes)",
+      "caloriesPreview": "{{calories}} kcal burned"
+    },
+    "exerciseEntrySummary": "{{minutes}} min · {{calories}} kcal burned"
   },
   "addFood": {
     "productNotFound": {
@@ -195,10 +226,26 @@
       "offlineBanner": "Online search unavailable. Check your connection.",
       "addCustom": "Add custom food",
       "addCustomPrompt": "+ Not what you're looking for? Add custom",
-      "openFoodFactsResults": { "one": "Open Food Facts · {{count}} result", "other": "Open Food Facts · {{count}} results" },
+      "openFoodFactsResults": {
+        "one": "Open Food Facts · {{count}} result",
+        "other": "Open Food Facts · {{count}} results"
+      },
       "recent": "Recent",
       "caloriesPer100g": "{{calories}} kcal / 100g",
       "addToMeal": "Add to {{meal}}"
+    }
+  },
+  "addExercise": {
+    "search": {
+      "title": "Log Exercise",
+      "placeholder": "Search activities...",
+      "hint": "Start typing to search activities",
+      "noResults": "No matching activities"
+    },
+    "duration": {
+      "title": "How long?",
+      "equation": "{{minutes}} min = {{calories}} kcal burned",
+      "logButton": "Log Exercise"
     }
   },
   "profile": {
