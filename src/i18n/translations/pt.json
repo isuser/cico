@@ -33,16 +33,33 @@
     "dinner": "Jantar"
   },
   "activityLevel": {
-    "sedentary": { "label": "Sedentário", "description": "Pouco ou nenhum exercício" },
-    "lightlyActive": { "label": "Levemente Ativo", "description": "Exercício leve 1–3 dias por semana" },
+    "sedentary": {
+      "label": "Sedentário",
+      "description": "Pouco ou nenhum exercício"
+    },
+    "lightlyActive": {
+      "label": "Levemente Ativo",
+      "description": "Exercício leve 1–3 dias por semana"
+    },
     "moderatelyActive": {
       "label": "Moderadamente Ativo",
       "description": "Exercício moderado 3–5 dias por semana"
     },
-    "veryActive": { "label": "Muito Ativo", "description": "Exercício intenso 6–7 dias por semana" }
+    "veryActive": {
+      "label": "Muito Ativo",
+      "description": "Exercício intenso 6–7 dias por semana"
+    }
   },
   "date": {
-    "weekdayLetter": { "sun": "D", "mon": "S", "tue": "T", "wed": "Q", "thu": "Q", "fri": "S", "sat": "S" },
+    "weekdayLetter": {
+      "sun": "D",
+      "mon": "S",
+      "tue": "T",
+      "wed": "Q",
+      "thu": "Q",
+      "fri": "S",
+      "sat": "S"
+    },
     "weekdayShort": {
       "sun": "Dom",
       "mon": "Seg",
@@ -137,12 +154,19 @@
     "weightModal": {
       "title": "Registrar seu peso",
       "weightLabel": "Peso"
+    },
+    "exercise": {
+      "title": "Exercício",
+      "weekTotal": "Total da semana",
+      "weekTotalValue": "{{value}} kcal queimadas",
+      "emptyState": "Registre exercícios para ver suas tendências semanais"
     }
   },
   "cico": {
     "consumed": "Consumidas",
     "remaining": "Restantes",
     "ofGoal": "de {{goal}} kcal da meta",
+    "ofGoalWithExercise": "de {{goal}} kcal da meta + {{burned}} kcal de exercício",
     "editEntry": {
       "amount": "Quantidade",
       "caloriesPreview": "{{calories}} kcal"
@@ -155,7 +179,21 @@
     "mealSection": {
       "emptyState": "Toque em + para registrar sua primeira refeição",
       "subtotal": "{{subtotal}} kcal"
-    }
+    },
+    "exerciseSection": {
+      "title": "Exercício",
+      "emptyState": "Toque em + para registrar seu primeiro exercício",
+      "subtotal": "{{subtotal}} kcal queimadas"
+    },
+    "deleteExerciseEntry": {
+      "title": "Excluir item?",
+      "message": "Remover \"{{name}}\" do exercício de hoje."
+    },
+    "editExerciseEntry": {
+      "duration": "Duração (minutos)",
+      "caloriesPreview": "{{calories}} kcal queimadas"
+    },
+    "exerciseEntrySummary": "{{minutes}} min · {{calories}} kcal queimadas"
   },
   "addFood": {
     "productNotFound": {
@@ -195,10 +233,26 @@
       "offlineBanner": "Busca online indisponível. Verifique sua conexão.",
       "addCustom": "Adicionar alimento personalizado",
       "addCustomPrompt": "+ Não encontrou o que procurava? Adicionar personalizado",
-      "openFoodFactsResults": { "one": "Open Food Facts · {{count}} resultado", "other": "Open Food Facts · {{count}} resultados" },
+      "openFoodFactsResults": {
+        "one": "Open Food Facts · {{count}} resultado",
+        "other": "Open Food Facts · {{count}} resultados"
+      },
       "recent": "Recentes",
       "caloriesPer100g": "{{calories}} kcal / 100g",
       "addToMeal": "Adicionar a {{meal}}"
+    }
+  },
+  "addExercise": {
+    "search": {
+      "title": "Registrar exercício",
+      "placeholder": "Buscar atividades...",
+      "hint": "Comece a digitar para buscar atividades",
+      "noResults": "Nenhuma atividade encontrada"
+    },
+    "duration": {
+      "title": "Quanto tempo?",
+      "equation": "{{minutes}} min = {{calories}} kcal queimadas",
+      "logButton": "Registrar exercício"
     }
   },
   "profile": {

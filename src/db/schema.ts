@@ -1,6 +1,6 @@
 import type { SQLiteDatabase } from 'expo-sqlite';
 
-const DATABASE_VERSION = 4;
+const DATABASE_VERSION = 5;
 
 const CREATE_TABLES = `
 CREATE TABLE IF NOT EXISTS profile (
@@ -99,6 +99,22 @@ export async function migrateDbIfNeeded(db: SQLiteDatabase): Promise<void> {
       `ALTER TABLE profile ADD COLUMN language TEXT NOT NULL DEFAULT 'en' CHECK (language IN ('en', 'pt', 'es', 'fr'))`
     );
     currentDbVersion = 4;
+  }
+
+  if (currentDbVersion === 4) {
+    await db.execAsync(`
+      CREATE TABLE IF NOT EXISTS exercise_logs (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        date TEXT NOT NULL,
+        activity_name TEXT NOT NULL,
+        met_value REAL NOT NULL,
+        duration_minutes REAL NOT NULL,
+        calories_burned INTEGER NOT NULL,
+        created_at TEXT NOT NULL
+      );
+      CREATE INDEX IF NOT EXISTS idx_exercise_logs_date ON exercise_logs(date);
+    `);
+    currentDbVersion = 5;
   }
 
   await db.execAsync(`PRAGMA user_version = ${DATABASE_VERSION}`);

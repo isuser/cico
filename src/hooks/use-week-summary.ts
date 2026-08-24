@@ -1,6 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { getFoodLogsForDateRange, getProfile, getWeightLogsForRange, useDatabase } from '@/db';
+import {
+  getExerciseLogsForDateRange,
+  getFoodLogsForDateRange,
+  getProfile,
+  getWeightLogsForRange,
+  useDatabase,
+} from '@/db';
 import { getWeekDates } from '@/lib/date';
 
 export type WeekSummary = {
@@ -8,6 +14,8 @@ export type WeekSummary = {
   weekDates: string[];
   /** Total calories logged per date — dates with no entries are simply absent. */
   dayTotals: Record<string, number>;
+  /** Total calories burned per date — dates with no entries are simply absent. */
+  exerciseDayTotals: Record<string, number>;
   calorieGoal: number | null;
   latestWeightKg: number | null;
   latestWeightDate: string | null;
@@ -19,6 +27,7 @@ export function useWeekSummary(weekStart: Date): WeekSummary {
   const [loading, setLoading] = useState(true);
   const [calorieGoal, setCalorieGoal] = useState<number | null>(null);
   const [dayTotals, setDayTotals] = useState<Record<string, number>>({});
+  const [exerciseDayTotals, setExerciseDayTotals] = useState<Record<string, number>>({});
   const [latestWeightKg, setLatestWeightKg] = useState<number | null>(null);
   const [latestWeightDate, setLatestWeightDate] = useState<string | null>(null);
 
@@ -28,9 +37,10 @@ export function useWeekSummary(weekStart: Date): WeekSummary {
 
   const load = useCallback(async () => {
     setLoading(true);
-    const [profile, logs, weightLogs] = await Promise.all([
+    const [profile, logs, exerciseLogs, weightLogs] = await Promise.all([
       getProfile(db),
       getFoodLogsForDateRange(db, startIso, endIso),
+      getExerciseLogsForDateRange(db, startIso, endIso),
       getWeightLogsForRange(db, startIso, endIso),
     ]);
 
@@ -38,10 +48,15 @@ export function useWeekSummary(weekStart: Date): WeekSummary {
     for (const log of logs) {
       totals[log.date] = (totals[log.date] ?? 0) + log.calories;
     }
+    const exerciseTotals: Record<string, number> = {};
+    for (const log of exerciseLogs) {
+      exerciseTotals[log.date] = (exerciseTotals[log.date] ?? 0) + log.calories_burned;
+    }
     // getWeightLogsForRange returns oldest-to-newest — the last entry is this week's most recent.
     const latestWeightThisWeek = weightLogs.at(-1) ?? null;
 
     setDayTotals(totals);
+    setExerciseDayTotals(exerciseTotals);
     setCalorieGoal(profile?.calorie_goal ?? null);
     setLatestWeightKg(latestWeightThisWeek?.weight ?? null);
     setLatestWeightDate(latestWeightThisWeek?.date ?? null);
@@ -52,5 +67,14 @@ export function useWeekSummary(weekStart: Date): WeekSummary {
     load();
   }, [load]);
 
-  return { loading, weekDates, dayTotals, calorieGoal, latestWeightKg, latestWeightDate, refresh: load };
+  return {
+    loading,
+    weekDates,
+    dayTotals,
+    exerciseDayTotals,
+    calorieGoal,
+    latestWeightKg,
+    latestWeightDate,
+    refresh: load,
+  };
 }
