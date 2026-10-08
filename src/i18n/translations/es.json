@@ -231,6 +231,8 @@
     "search": {
       "placeholder": "Buscar alimentos...",
       "offlineBanner": "Búsqueda en línea no disponible. Verifica tu conexión.",
+      "unavailableBanner": "La búsqueda en línea no está disponible temporalmente. Inténtalo de nuevo en un momento.",
+      "noResults": "No se encontraron alimentos",
       "addCustom": "Añadir alimento personalizado",
       "addCustomPrompt": "+ ¿No encuentras lo que buscas? Añadir personalizado",
       "openFoodFactsResults": {

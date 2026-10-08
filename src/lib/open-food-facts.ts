@@ -21,6 +21,40 @@ function timeoutSignal(ms: number): AbortSignal {
   return controller.signal;
 }
 
+/**
+ * `network`: the request never got a response (no internet, DNS failure, timeout).
+ * `service`: Open Food Facts responded, but with an error status or a non-JSON body
+ * (e.g. its 503 "temporarily unavailable" HTML page when overloaded or rate limiting).
+ */
+export type OpenFoodFactsErrorKind = 'network' | 'service';
+
+export class OpenFoodFactsError extends Error {
+  constructor(
+    readonly kind: OpenFoodFactsErrorKind,
+    message: string
+  ) {
+    super(message);
+    this.name = 'OpenFoodFactsError';
+  }
+}
+
+async function fetchJson<T>(url: string): Promise<T> {
+  let response: Response;
+  try {
+    response = await fetch(url, { signal: timeoutSignal(FETCH_TIMEOUT_MS) });
+  } catch (error) {
+    throw new OpenFoodFactsError('network', `Open Food Facts request failed: ${String(error)}`);
+  }
+  if (!response.ok) {
+    throw new OpenFoodFactsError('service', `Open Food Facts responded ${response.status}`);
+  }
+  try {
+    return (await response.json()) as T;
+  } catch {
+    throw new OpenFoodFactsError('service', 'Open Food Facts returned an invalid response');
+  }
+}
+
 type RawNutriments = {
   'energy-kcal_100g'?: number;
   proteins_100g?: number;
@@ -68,11 +102,7 @@ export async function searchOpenFoodFacts(query: string): Promise<OpenFoodFactsP
   const url = `${BASE_URL}/cgi/search.pl?search_terms=${encodeURIComponent(
     query
   )}&search_simple=1&action=process&json=1&page_size=20`;
-  const response = await fetch(url, { signal: timeoutSignal(FETCH_TIMEOUT_MS) });
-  if (!response.ok) {
-    throw new Error(`Open Food Facts search failed: ${response.status}`);
-  }
-  const data: { products?: RawProduct[] } = await response.json();
+  const data = await fetchJson<{ products?: RawProduct[] }>(url);
   return (data.products ?? [])
     .map(mapProduct)
     .filter((product): product is OpenFoodFactsProduct => product !== null);
@@ -82,11 +112,7 @@ export async function lookupBarcodeOpenFoodFacts(
   barcode: string
 ): Promise<OpenFoodFactsProduct | null> {
   const url = `${BASE_URL}/api/v2/product/${encodeURIComponent(barcode)}.json`;
-  const response = await fetch(url, { signal: timeoutSignal(FETCH_TIMEOUT_MS) });
-  if (!response.ok) {
-    throw new Error(`Open Food Facts lookup failed: ${response.status}`);
-  }
-  const data: { status?: number; product?: RawProduct } = await response.json();
+  const data = await fetchJson<{ status?: number; product?: RawProduct }>(url);
   if (data.status !== 1 || !data.product) {
     return null;
   }
