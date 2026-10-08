@@ -1,39 +1,69 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Modal, Pressable, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { FormField } from '@/components/form-field';
+import { DayHeader } from '@/components/cico/day-header';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Spacing } from '@/constants/theme';
-import type { Units } from '@/db';
+import { getWeightLogForDate, useDatabase, type Units } from '@/db';
 import { useTheme } from '@/hooks/use-theme';
 import { useTranslation } from '@/i18n/context';
-import { lbsToKg } from '@/lib/units';
+import { addDays, parseISODate, toISODate } from '@/lib/date';
+import { kgToLbsRounded, lbsToKg } from '@/lib/units';
 
 export function WeightLogModal({
   visible,
   units,
+  date,
+  todayIso,
+  onChangeDate,
   onClose,
   onSave,
 }: {
   visible: boolean;
   units: Units;
+  /** The date being logged — any date up to today can be chosen. */
+  date: string;
+  todayIso: string;
+  onChangeDate: (date: string) => void;
   onClose: () => void;
-  onSave: (weightKg: number) => Promise<void>;
+  onSave: (date: string, weightKg: number) => Promise<void>;
 }) {
   const theme = useTheme();
   const { t } = useTranslation();
+  const db = useDatabase();
   const [weight, setWeight] = useState('');
+  /** Whether `date` already has an entry — saving overwrites it (one weight per day). */
+  const [hasExistingEntry, setHasExistingEntry] = useState(false);
   const [saving, setSaving] = useState(false);
   const isValid = Number(weight) > 0;
   const isImperial = units === 'imperial';
+
+  // Prefills the existing entry for the selected date so re-logging a day reads as an edit.
+  useEffect(() => {
+    if (!visible) return;
+    let cancelled = false;
+    getWeightLogForDate(db, date).then((existing) => {
+      if (cancelled) return;
+      setHasExistingEntry(existing !== null);
+      setWeight(
+        existing ? String(isImperial ? kgToLbsRounded(existing.weight) : existing.weight) : ''
+      );
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [db, visible, date, isImperial]);
+
+  const shiftDate = (days: number) => onChangeDate(toISODate(addDays(parseISODate(date), days)));
 
   const handleSave = async () => {
     if (!isValid || saving) return;
     setSaving(true);
     try {
-      await onSave(isImperial ? lbsToKg(Number(weight)) : Number(weight));
+      await onSave(date, isImperial ? lbsToKg(Number(weight)) : Number(weight));
       setWeight('');
       onClose();
     } finally {
@@ -53,6 +83,12 @@ export function WeightLogModal({
           }}>
           <SafeAreaView edges={['bottom']} style={{ gap: Spacing.three }}>
             <ThemedText type="subtitle">{t('dashboard.weightModal.title')}</ThemedText>
+            <DayHeader
+              date={date}
+              todayIso={todayIso}
+              onPrev={() => shiftDate(-1)}
+              onNext={() => shiftDate(1)}
+            />
             <FormField
               label={t('dashboard.weightModal.weightLabel')}
               value={weight}
@@ -62,6 +98,11 @@ export function WeightLogModal({
               suffix={isImperial ? 'lbs' : 'kg'}
               autoFocus
             />
+            {hasExistingEntry ? (
+              <ThemedText type="label" themeColor="textSecondary">
+                {t('dashboard.weightModal.replacesExisting')}
+              </ThemedText>
+            ) : null}
             <Pressable
               onPress={handleSave}
               disabled={!isValid || saving}

@@ -173,13 +173,15 @@
     "emptyState": "Enregistrez des repas pour voir vos tendances hebdomadaires",
     "weightCard": {
       "title": "Enregistrer le poids de cette semaine",
+      "titlePastWeek": "Enregistrer un poids pour cette semaine",
       "lastEntry": "Dernier : {{weight}} {{unit}} · {{date}}",
       "neverPrompted": "Jamais demandé — toujours facultatif",
       "add": "+ Ajouter"
     },
     "weightModal": {
       "title": "Enregistrer votre poids",
-      "weightLabel": "Poids"
+      "weightLabel": "Poids",
+      "replacesExisting": "L'enregistrement remplace le poids déjà saisi pour ce jour."
     },
     "exercise": {
       "title": "Exercice",
