@@ -173,13 +173,15 @@
     "emptyState": "Registra comidas para ver tus tendencias semanales",
     "weightCard": {
       "title": "Registrar el peso de esta semana",
+      "titlePastWeek": "Registrar peso en esta semana",
       "lastEntry": "Último: {{weight}} {{unit}} · {{date}}",
       "neverPrompted": "Nunca solicitado — siempre opcional",
       "add": "+ Añadir"
     },
     "weightModal": {
       "title": "Registra tu peso",
-      "weightLabel": "Peso"
+      "weightLabel": "Peso",
+      "replacesExisting": "Al guardar se reemplaza el peso ya registrado para este día."
     },
     "exercise": {
       "title": "Ejercicio",

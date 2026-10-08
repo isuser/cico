@@ -173,13 +173,15 @@
     "emptyState": "Log meals to see your weekly trends",
     "weightCard": {
       "title": "Log this week’s weight",
+      "titlePastWeek": "Log weight for this week",
       "lastEntry": "Last: {{weight}} {{unit}} · {{date}}",
       "neverPrompted": "Never prompted — always optional",
       "add": "+ Add"
     },
     "weightModal": {
       "title": "Log your weight",
-      "weightLabel": "Weight"
+      "weightLabel": "Weight",
+      "replacesExisting": "Saving replaces the weight already logged for this day."
     },
     "exercise": {
       "title": "Exercise",

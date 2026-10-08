@@ -9,12 +9,14 @@ import { formatDayLabel } from '@/lib/date';
 import { kgToLbsRounded } from '@/lib/units';
 
 export function WeightLogCard({
+  isCurrentWeek,
   latestWeightKg,
   latestWeightDate,
   todayIso,
   units,
   onAdd,
 }: {
+  isCurrentWeek: boolean;
   latestWeightKg: number | null;
   latestWeightDate: string | null;
   todayIso: string;
@@ -41,7 +43,9 @@ export function WeightLogCard({
         paddingHorizontal: Spacing.four,
       }}>
       <View style={{ flex: 1 }}>
-        <ThemedText type="bold">{t('dashboard.weightCard.title')}</ThemedText>
+        <ThemedText type="bold">
+          {isCurrentWeek ? t('dashboard.weightCard.title') : t('dashboard.weightCard.titlePastWeek')}
+        </ThemedText>
         <ThemedText type="label" themeColor="textSecondary" style={{ marginTop: 2 }}>
           {displayWeight !== null && latestWeightDate !== null
             ? t('dashboard.weightCard.lastEntry', {

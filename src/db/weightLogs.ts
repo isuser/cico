@@ -36,6 +36,15 @@ export async function getWeightLogsForRange(
   );
 }
 
+export async function getWeightLogForDate(
+  db: SQLiteDatabase,
+  date: string
+): Promise<WeightLog | null> {
+  return db.getFirstAsync<WeightLog>('SELECT * FROM weight_logs WHERE date = $date', {
+    $date: date,
+  });
+}
+
 export async function getLatestWeightLog(db: SQLiteDatabase): Promise<WeightLog | null> {
   return db.getFirstAsync<WeightLog>('SELECT * FROM weight_logs ORDER BY date DESC LIMIT 1');
 }

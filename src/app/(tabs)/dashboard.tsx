@@ -33,6 +33,7 @@ export default function DashboardScreen() {
 
   const [weekStart, setWeekStart] = useState(currentWeekStart);
   const [weightModalVisible, setWeightModalVisible] = useState(false);
+  const [weightDate, setWeightDate] = useState(todayIso);
   const {
     loading,
     weekDates,
@@ -71,8 +72,8 @@ export default function DashboardScreen() {
     wasCurrentWeek.current = isCurrentWeek;
   });
 
-  const handleSaveWeight = async (weightKg: number) => {
-    await upsertWeightLogForDate(db, todayIso, weightKg);
+  const handleSaveWeight = async (date: string, weightKg: number) => {
+    await upsertWeightLogForDate(db, date, weightKg);
     await refresh();
   };
 
@@ -125,15 +126,18 @@ export default function DashboardScreen() {
                 todayIso={todayIso}
               />
 
-              {isCurrentWeek ? (
-                <WeightLogCard
-                  latestWeightKg={latestWeightKg}
-                  latestWeightDate={latestWeightDate}
-                  todayIso={todayIso}
-                  units={units}
-                  onAdd={() => setWeightModalVisible(true)}
-                />
-              ) : null}
+              <WeightLogCard
+                isCurrentWeek={isCurrentWeek}
+                latestWeightKg={latestWeightKg}
+                latestWeightDate={latestWeightDate}
+                todayIso={todayIso}
+                units={units}
+                onAdd={() => {
+                  // Today on the current week, or the last day of a past week being viewed.
+                  setWeightDate(isCurrentWeek ? todayIso : weekDates[6]);
+                  setWeightModalVisible(true);
+                }}
+              />
 
               <RecentDaysList
                 weekDates={weekDates}
@@ -149,6 +153,9 @@ export default function DashboardScreen() {
       <WeightLogModal
         visible={weightModalVisible}
         units={units}
+        date={weightDate}
+        todayIso={todayIso}
+        onChangeDate={setWeightDate}
         onClose={() => setWeightModalVisible(false)}
         onSave={handleSaveWeight}
       />
