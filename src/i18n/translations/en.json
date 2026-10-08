@@ -231,6 +231,8 @@
     "search": {
       "placeholder": "Search foods...",
       "offlineBanner": "Online search unavailable. Check your connection.",
+      "unavailableBanner": "Online search is temporarily unavailable. Try again in a moment.",
+      "noResults": "No foods found",
       "addCustom": "Add custom food",
       "addCustomPrompt": "+ Not what you're looking for? Add custom",
       "openFoodFactsResults": {

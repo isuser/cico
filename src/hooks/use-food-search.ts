@@ -1,18 +1,26 @@
 import { useEffect, useState } from 'react';
 
 import { getRecentFoods, searchFoodsLocal, useDatabase, type Food } from '@/db';
-import { searchOpenFoodFacts, type OpenFoodFactsProduct } from '@/lib/open-food-facts';
+import {
+  OpenFoodFactsError,
+  searchOpenFoodFacts,
+  type OpenFoodFactsErrorKind,
+  type OpenFoodFactsProduct,
+} from '@/lib/open-food-facts';
 
 const DEBOUNCE_MS = 350;
 
 export type FoodSearchState = {
   /** Cached/custom foods matching the query — or, when the query is empty, recently used foods. */
   localResults: Food[];
-  /** Fresh Open Food Facts results — empty when offline or the query is empty. */
+  /** Fresh Open Food Facts results — empty when the fetch failed or the query is empty. */
   remoteResults: OpenFoodFactsProduct[];
   loading: boolean;
-  /** True when the remote fetch failed (network error/timeout) — show the offline banner. */
-  offline: boolean;
+  /**
+   * Why the remote fetch failed, or null when it succeeded (including with zero results).
+   * `network` → no connection/timeout; `service` → Open Food Facts itself errored.
+   */
+  remoteError: OpenFoodFactsErrorKind | null;
 };
 
 export function useFoodSearch(query: string): FoodSearchState {
@@ -20,7 +28,7 @@ export function useFoodSearch(query: string): FoodSearchState {
   const [localResults, setLocalResults] = useState<Food[]>([]);
   const [remoteResults, setRemoteResults] = useState<OpenFoodFactsProduct[]>([]);
   const [loading, setLoading] = useState(false);
-  const [offline, setOffline] = useState(false);
+  const [remoteError, setRemoteError] = useState<OpenFoodFactsErrorKind | null>(null);
 
   const trimmed = query.trim();
 
@@ -32,7 +40,7 @@ export function useFoodSearch(query: string): FoodSearchState {
         if (!cancelled) setLocalResults(recent);
       });
       setRemoteResults([]);
-      setOffline(false);
+      setRemoteError(null);
       setLoading(false);
       return () => {
         cancelled = true;
@@ -49,12 +57,12 @@ export function useFoodSearch(query: string): FoodSearchState {
         const remote = await searchOpenFoodFacts(trimmed);
         if (!cancelled) {
           setRemoteResults(remote);
-          setOffline(false);
+          setRemoteError(null);
         }
-      } catch {
+      } catch (error) {
         if (!cancelled) {
           setRemoteResults([]);
-          setOffline(true);
+          setRemoteError(error instanceof OpenFoodFactsError ? error.kind : 'network');
         }
       } finally {
         if (!cancelled) setLoading(false);
@@ -67,5 +75,5 @@ export function useFoodSearch(query: string): FoodSearchState {
     };
   }, [db, trimmed]);
 
-  return { localResults, remoteResults, loading, offline };
+  return { localResults, remoteResults, loading, remoteError };
 }

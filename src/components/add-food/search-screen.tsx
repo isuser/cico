@@ -30,8 +30,14 @@ export function SearchScreen({
   const { t } = useTranslation();
   const [query, setQuery] = useState('');
   const [bannerDismissed, setBannerDismissed] = useState(false);
-  const { localResults, remoteResults, offline } = useFoodSearch(query);
+  const { localResults, remoteResults, loading, remoteError } = useFoodSearch(query);
   const hasQuery = query.trim().length > 0;
+  const noResults =
+    hasQuery &&
+    !loading &&
+    remoteError === null &&
+    localResults.length === 0 &&
+    remoteResults.length === 0;
 
   return (
     <ThemedView
@@ -92,7 +98,7 @@ export function SearchScreen({
           )}
         </View>
 
-        {offline && !bannerDismissed ? (
+        {remoteError && !bannerDismissed ? (
           <View
             style={{
               flexDirection: 'row',
@@ -103,7 +109,9 @@ export function SearchScreen({
               padding: Spacing.two,
             }}>
             <ThemedText type="label" style={{ flex: 1 }}>
-              {t('addFood.search.offlineBanner')}
+              {remoteError === 'network'
+                ? t('addFood.search.offlineBanner')
+                : t('addFood.search.unavailableBanner')}
             </ThemedText>
             <Pressable onPress={() => setBannerDismissed(true)} hitSlop={8}>
               <ThemedText type="label">✕</ThemedText>
@@ -139,13 +147,13 @@ export function SearchScreen({
               {t('addFood.search.addCustom')}
             </ThemedText>
           </Pressable>
-        ) : (
+        ) : !remoteError && !loading ? (
           <ThemedText type="label" themeColor="textSecondary">
             {t('addFood.search.openFoodFactsResults', {
               count: remoteResults.length,
             })}
           </ThemedText>
-        )}
+        ) : null}
 
         {!hasQuery && localResults.length > 0 ? (
           <ThemedText type="label" themeColor="textSecondary" style={{ textTransform: 'uppercase' }}>
@@ -170,6 +178,14 @@ export function SearchScreen({
               onPress={() => onSelectRemote(product)}
             />
           ))}
+          {noResults ? (
+            <ThemedText
+              type="label"
+              themeColor="textSecondary"
+              style={{ paddingVertical: Spacing.three, textAlign: 'center' }}>
+              {t('addFood.search.noResults')}
+            </ThemedText>
+          ) : null}
           {hasQuery ? (
             <Pressable
               onPress={onOpenCustom}

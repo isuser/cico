@@ -231,6 +231,8 @@
     "search": {
       "placeholder": "Rechercher des aliments...",
       "offlineBanner": "Recherche en ligne indisponible. Vérifiez votre connexion.",
+      "unavailableBanner": "La recherche en ligne est temporairement indisponible. Réessayez dans un instant.",
+      "noResults": "Aucun aliment trouvé",
       "addCustom": "Ajouter un aliment personnalisé",
       "addCustomPrompt": "+ Vous ne trouvez pas ce que vous cherchez ? Ajouter un aliment personnalisé",
       "openFoodFactsResults": {
