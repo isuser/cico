@@ -1,6 +1,7 @@
 import { createContext, useContext, useMemo, useState, type PropsWithChildren } from 'react';
 
 import type { ActivityLevel, Gender, Units } from '@/db';
+import type { CountryCode } from '@/lib/countries';
 
 export type OnboardingDraft = {
   name: string;
@@ -13,6 +14,8 @@ export type OnboardingDraft = {
   calorieGoal: string;
   /** Once true, the calculated suggestion stops overwriting a manual edit. */
   calorieGoalTouched: boolean;
+  /** null = worldwide food search. */
+  country: CountryCode | null;
   units: Units;
 };
 
@@ -25,6 +28,7 @@ const initialDraft: OnboardingDraft = {
   activityLevel: null,
   calorieGoal: '',
   calorieGoalTouched: false,
+  country: null,
   units: 'metric',
 };
 

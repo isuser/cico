@@ -1,3 +1,5 @@
+import type { CountryCode } from '@/lib/countries';
+
 export type OpenFoodFactsProduct = {
   barcode: string;
   name: string;
@@ -97,11 +99,19 @@ function mapProduct(raw: RawProduct): OpenFoodFactsProduct | null {
   };
 }
 
-/** Always fetches fresh — no local-first caching of search results themselves. */
-export async function searchOpenFoodFacts(query: string): Promise<OpenFoodFactsProduct[]> {
+/**
+ * Always fetches fresh — no local-first caching of search results themselves. Passing a
+ * `country` restricts results to products sold there (OFF's `cc` parameter); null searches
+ * worldwide.
+ */
+export async function searchOpenFoodFacts(
+  query: string,
+  country: CountryCode | null = null
+): Promise<OpenFoodFactsProduct[]> {
+  const countryParam = country ? `&cc=${country}` : '';
   const url = `${BASE_URL}/cgi/search.pl?search_terms=${encodeURIComponent(
     query
-  )}&search_simple=1&action=process&json=1&page_size=20`;
+  )}&search_simple=1&action=process&json=1&page_size=20${countryParam}`;
   const data = await fetchJson<{ products?: RawProduct[] }>(url);
   return (data.products ?? [])
     .map(mapProduct)

@@ -26,6 +26,28 @@
     "monday": "Monday",
     "sunday": "Sunday"
   },
+  "countries": {
+    "worldwide": "Worldwide",
+    "ar": "Argentina",
+    "au": "Australia",
+    "at": "Austria",
+    "be": "Belgium",
+    "br": "Brazil",
+    "ca": "Canada",
+    "fr": "France",
+    "de": "Germany",
+    "ie": "Ireland",
+    "it": "Italy",
+    "mx": "Mexico",
+    "nl": "Netherlands",
+    "pl": "Poland",
+    "pt": "Portugal",
+    "es": "Spain",
+    "se": "Sweden",
+    "ch": "Switzerland",
+    "gb": "United Kingdom",
+    "us": "United States"
+  },
   "mealTypes": {
     "breakfast": "Breakfast",
     "lunch": "Lunch",
@@ -129,6 +151,10 @@
       "suggestion": "Based on your info, we suggest {{suggestion}} kcal/day (BMR × activity level). Adjust it if you'd like.",
       "fallbackSubtitle": "Set your daily calorie goal.",
       "label": "Daily calorie goal"
+    },
+    "country": {
+      "title": "Where do you shop?",
+      "subtitle": "Food search will show products sold in this country first. Barcode scanning always works worldwide. You can change this later in Profile."
     },
     "units": {
       "title": "Units",
@@ -240,6 +266,11 @@
         "one": "Open Food Facts · {{count}} result",
         "other": "Open Food Facts · {{count}} results"
       },
+      "openFoodFactsResultsInCountry": {
+        "one": "Open Food Facts · {{country}} · {{count}} result",
+        "other": "Open Food Facts · {{country}} · {{count}} results"
+      },
+      "worldwideFallback": "Nothing found in {{country}} — showing worldwide results",
       "recent": "Recent",
       "caloriesPer100g": "{{calories}} kcal / 100g",
       "addToMeal": "Add to {{meal}}"
@@ -282,7 +313,9 @@
     "appPreferences": {
       "title": "App preferences",
       "firstDayOfWeek": "First day of week",
-      "language": "Language"
+      "language": "Language",
+      "country": "Country",
+      "countryHint": "Used to show foods sold in your country when searching. Barcode scanning always works worldwide."
     }
   }
 }

@@ -26,6 +26,28 @@
     "monday": "Lunes",
     "sunday": "Domingo"
   },
+  "countries": {
+    "worldwide": "Mundial",
+    "ar": "Argentina",
+    "au": "Australia",
+    "at": "Austria",
+    "be": "Bélgica",
+    "br": "Brasil",
+    "ca": "Canadá",
+    "fr": "Francia",
+    "de": "Alemania",
+    "ie": "Irlanda",
+    "it": "Italia",
+    "mx": "México",
+    "nl": "Países Bajos",
+    "pl": "Polonia",
+    "pt": "Portugal",
+    "es": "España",
+    "se": "Suecia",
+    "ch": "Suiza",
+    "gb": "Reino Unido",
+    "us": "Estados Unidos"
+  },
   "mealTypes": {
     "breakfast": "Desayuno",
     "lunch": "Almuerzo",
@@ -129,6 +151,10 @@
       "suggestion": "Según tu información, sugerimos {{suggestion}} kcal/día (TMB × nivel de actividad). Ajústalo si lo deseas.",
       "fallbackSubtitle": "Establece tu meta diaria de calorías.",
       "label": "Meta diaria de calorías"
+    },
+    "country": {
+      "title": "¿Dónde haces la compra?",
+      "subtitle": "La búsqueda de alimentos mostrará primero productos vendidos en este país. El escaneo de códigos de barras funciona en todo el mundo. Puedes cambiarlo más tarde en Perfil."
     },
     "units": {
       "title": "Unidades",
@@ -240,6 +266,11 @@
         "one": "Open Food Facts · {{count}} resultado",
         "other": "Open Food Facts · {{count}} resultados"
       },
+      "openFoodFactsResultsInCountry": {
+        "one": "Open Food Facts · {{country}} · {{count}} resultado",
+        "other": "Open Food Facts · {{country}} · {{count}} resultados"
+      },
+      "worldwideFallback": "No se encontró nada en {{country}} — mostrando resultados mundiales",
       "recent": "Recientes",
       "caloriesPer100g": "{{calories}} kcal / 100g",
       "addToMeal": "Añadir a {{meal}}"
@@ -282,7 +313,9 @@
     "appPreferences": {
       "title": "Preferencias de la aplicación",
       "firstDayOfWeek": "Primer día de la semana",
-      "language": "Idioma"
+      "language": "Idioma",
+      "country": "País",
+      "countryHint": "Se usa para mostrar alimentos vendidos en tu país al buscar. El escaneo de códigos de barras funciona en todo el mundo."
     }
   }
 }

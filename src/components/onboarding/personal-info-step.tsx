@@ -33,7 +33,7 @@ export function PersonalInfoStep({ onNext, onBack }: { onNext: () => void; onBac
   return (
     <OnboardingStepShell
       step={2}
-      totalSteps={5}
+      totalSteps={6}
       title={t('onboarding.personalInfo.title')}
       onBack={onBack}
       onNext={onNext}

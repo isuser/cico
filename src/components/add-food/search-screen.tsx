@@ -30,7 +30,8 @@ export function SearchScreen({
   const { t, language } = useTranslation();
   const [query, setQuery] = useState('');
   const [bannerDismissed, setBannerDismissed] = useState(false);
-  const { localResults, remoteResults, loading, remoteError } = useFoodSearch(query);
+  const { localResults, remoteResults, loading, remoteError, searchCountry, fellBackToWorldwide } =
+    useFoodSearch(query);
   const hasQuery = query.trim().length > 0;
   const noResults =
     hasQuery &&
@@ -148,11 +149,25 @@ export function SearchScreen({
             </ThemedText>
           </Pressable>
         ) : !remoteError && !loading ? (
-          <ThemedText type="label" themeColor="textSecondary">
-            {t('addFood.search.openFoodFactsResults', {
-              count: remoteResults.length,
-            })}
-          </ThemedText>
+          <View style={{ gap: Spacing.half }}>
+            {fellBackToWorldwide && searchCountry && remoteResults.length > 0 ? (
+              <ThemedText type="label" themeColor="textSecondary">
+                {t('addFood.search.worldwideFallback', {
+                  country: t(`countries.${searchCountry}`),
+                })}
+              </ThemedText>
+            ) : null}
+            <ThemedText type="label" themeColor="textSecondary">
+              {searchCountry && !fellBackToWorldwide
+                ? t('addFood.search.openFoodFactsResultsInCountry', {
+                    count: remoteResults.length,
+                    country: t(`countries.${searchCountry}`),
+                  })
+                : t('addFood.search.openFoodFactsResults', {
+                    count: remoteResults.length,
+                  })}
+            </ThemedText>
+          </View>
         ) : null}
 
         {!hasQuery && localResults.length > 0 ? (
