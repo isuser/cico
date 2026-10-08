@@ -233,6 +233,7 @@
       "offlineBanner": "Online search unavailable. Check your connection.",
       "unavailableBanner": "Online search is temporarily unavailable. Try again in a moment.",
       "noResults": "No foods found",
+      "tryEnglishTip": "Tip: try searching in English — many Open Food Facts products are only listed in English.",
       "addCustom": "Add custom food",
       "addCustomPrompt": "+ Not what you're looking for? Add custom",
       "openFoodFactsResults": {

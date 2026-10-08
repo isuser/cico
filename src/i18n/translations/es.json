@@ -233,6 +233,7 @@
       "offlineBanner": "Búsqueda en línea no disponible. Verifica tu conexión.",
       "unavailableBanner": "La búsqueda en línea no está disponible temporalmente. Inténtalo de nuevo en un momento.",
       "noResults": "No se encontraron alimentos",
+      "tryEnglishTip": "Consejo: prueba a buscar en inglés — muchos productos de Open Food Facts solo están registrados en inglés.",
       "addCustom": "Añadir alimento personalizado",
       "addCustomPrompt": "+ ¿No encuentras lo que buscas? Añadir personalizado",
       "openFoodFactsResults": {

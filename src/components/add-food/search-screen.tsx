@@ -27,7 +27,7 @@ export function SearchScreen({
   onSelectRemote: (product: OpenFoodFactsProduct) => void;
 }) {
   const theme = useTheme();
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
   const [query, setQuery] = useState('');
   const [bannerDismissed, setBannerDismissed] = useState(false);
   const { localResults, remoteResults, loading, remoteError } = useFoodSearch(query);
@@ -184,6 +184,14 @@ export function SearchScreen({
               themeColor="textSecondary"
               style={{ paddingVertical: Spacing.three, textAlign: 'center' }}>
               {t('addFood.search.noResults')}
+            </ThemedText>
+          ) : null}
+          {noResults && language !== 'en' ? (
+            <ThemedText
+              type="label"
+              themeColor="textSecondary"
+              style={{ paddingBottom: Spacing.three, textAlign: 'center' }}>
+              {t('addFood.search.tryEnglishTip')}
             </ThemedText>
           ) : null}
           {hasQuery ? (
