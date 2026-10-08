@@ -1,6 +1,6 @@
 import type { SQLiteDatabase } from 'expo-sqlite';
 
-const DATABASE_VERSION = 5;
+const DATABASE_VERSION = 6;
 
 const CREATE_TABLES = `
 CREATE TABLE IF NOT EXISTS profile (
@@ -115,6 +115,13 @@ export async function migrateDbIfNeeded(db: SQLiteDatabase): Promise<void> {
       CREATE INDEX IF NOT EXISTS idx_exercise_logs_date ON exercise_logs(date);
     `);
     currentDbVersion = 5;
+  }
+
+  if (currentDbVersion === 5) {
+    // Nullable: null means worldwide food search. No CHECK constraint so the curated country
+    // list in src/lib/countries.ts can grow without another migration.
+    await db.execAsync('ALTER TABLE profile ADD COLUMN country TEXT');
+    currentDbVersion = 6;
   }
 
   await db.execAsync(`PRAGMA user_version = ${DATABASE_VERSION}`);

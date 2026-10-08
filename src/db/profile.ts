@@ -15,8 +15,8 @@ export async function hasProfile(db: SQLiteDatabase): Promise<boolean> {
 /** Creates the single profile row, or overwrites it if one already exists. */
 export async function saveProfile(db: SQLiteDatabase, profile: ProfileInput): Promise<Profile> {
   await db.runAsync(
-    `INSERT INTO profile (id, name, gender, age, height, weight, calorie_goal, activity_level, units, first_day_of_week, language, created_at)
-     VALUES (1, $name, $gender, $age, $height, $weight, $calorie_goal, $activity_level, $units, $first_day_of_week, $language, $created_at)
+    `INSERT INTO profile (id, name, gender, age, height, weight, calorie_goal, activity_level, units, first_day_of_week, language, country, created_at)
+     VALUES (1, $name, $gender, $age, $height, $weight, $calorie_goal, $activity_level, $units, $first_day_of_week, $language, $country, $created_at)
      ON CONFLICT(id) DO UPDATE SET
        name = excluded.name,
        gender = excluded.gender,
@@ -27,7 +27,8 @@ export async function saveProfile(db: SQLiteDatabase, profile: ProfileInput): Pr
        activity_level = excluded.activity_level,
        units = excluded.units,
        first_day_of_week = excluded.first_day_of_week,
-       language = excluded.language`,
+       language = excluded.language,
+       country = excluded.country`,
     {
       $name: profile.name,
       $gender: profile.gender,
@@ -39,6 +40,7 @@ export async function saveProfile(db: SQLiteDatabase, profile: ProfileInput): Pr
       $units: profile.units,
       $first_day_of_week: profile.first_day_of_week,
       $language: profile.language,
+      $country: profile.country,
       $created_at: new Date().toISOString(),
     }
   );

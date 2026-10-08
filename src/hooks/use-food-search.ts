@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { getRecentFoods, searchFoodsLocal, useDatabase, type Food } from '@/db';
+import { getProfile, getRecentFoods, searchFoodsLocal, useDatabase, type Food } from '@/db';
+import type { CountryCode } from '@/lib/countries';
 import {
   OpenFoodFactsError,
   searchOpenFoodFacts,
@@ -21,6 +22,13 @@ export type FoodSearchState = {
    * `network` → no connection/timeout; `service` → Open Food Facts itself errored.
    */
   remoteError: OpenFoodFactsErrorKind | null;
+  /** The profile country the search was localized to, or null for a worldwide search. */
+  searchCountry: CountryCode | null;
+  /**
+   * True when the `searchCountry` search found nothing and `remoteResults` came from a worldwide
+   * retry instead.
+   */
+  fellBackToWorldwide: boolean;
 };
 
 export function useFoodSearch(query: string): FoodSearchState {
@@ -29,6 +37,8 @@ export function useFoodSearch(query: string): FoodSearchState {
   const [remoteResults, setRemoteResults] = useState<OpenFoodFactsProduct[]>([]);
   const [loading, setLoading] = useState(false);
   const [remoteError, setRemoteError] = useState<OpenFoodFactsErrorKind | null>(null);
+  const [searchCountry, setSearchCountry] = useState<CountryCode | null>(null);
+  const [fellBackToWorldwide, setFellBackToWorldwide] = useState(false);
 
   const trimmed = query.trim();
 
@@ -41,6 +51,8 @@ export function useFoodSearch(query: string): FoodSearchState {
       });
       setRemoteResults([]);
       setRemoteError(null);
+      setSearchCountry(null);
+      setFellBackToWorldwide(false);
       setLoading(false);
       return () => {
         cancelled = true;
@@ -54,15 +66,27 @@ export function useFoodSearch(query: string): FoodSearchState {
       setLocalResults(local);
 
       try {
-        const remote = await searchOpenFoodFacts(trimmed);
+        const country = (await getProfile(db))?.country ?? null;
+        let remote = await searchOpenFoodFacts(trimmed, country);
+        let fellBack = false;
+        // Only retry on a genuinely empty country search — OFF rate-limits searches, so a
+        // successful search with results never costs a second request.
+        if (country && remote.length === 0 && !cancelled) {
+          remote = await searchOpenFoodFacts(trimmed);
+          fellBack = true;
+        }
         if (!cancelled) {
           setRemoteResults(remote);
           setRemoteError(null);
+          setSearchCountry(country);
+          setFellBackToWorldwide(fellBack);
         }
       } catch (error) {
         if (!cancelled) {
           setRemoteResults([]);
           setRemoteError(error instanceof OpenFoodFactsError ? error.kind : 'network');
+          setSearchCountry(null);
+          setFellBackToWorldwide(false);
         }
       } finally {
         if (!cancelled) setLoading(false);
@@ -75,5 +99,5 @@ export function useFoodSearch(query: string): FoodSearchState {
     };
   }, [db, trimmed]);
 
-  return { localResults, remoteResults, loading, remoteError };
+  return { localResults, remoteResults, loading, remoteError, searchCountry, fellBackToWorldwide };
 }

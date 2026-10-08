@@ -26,6 +26,28 @@
     "monday": "Segunda-feira",
     "sunday": "Domingo"
   },
+  "countries": {
+    "worldwide": "Mundial",
+    "ar": "Argentina",
+    "au": "Austrália",
+    "at": "Áustria",
+    "be": "Bélgica",
+    "br": "Brasil",
+    "ca": "Canadá",
+    "fr": "França",
+    "de": "Alemanha",
+    "ie": "Irlanda",
+    "it": "Itália",
+    "mx": "México",
+    "nl": "Países Baixos",
+    "pl": "Polônia",
+    "pt": "Portugal",
+    "es": "Espanha",
+    "se": "Suécia",
+    "ch": "Suíça",
+    "gb": "Reino Unido",
+    "us": "Estados Unidos"
+  },
   "mealTypes": {
     "breakfast": "Café da manhã",
     "lunch": "Almoço",
@@ -129,6 +151,10 @@
       "suggestion": "Com base nas suas informações, sugerimos {{suggestion}} kcal/dia (TMB × nível de atividade). Ajuste se desejar.",
       "fallbackSubtitle": "Defina sua meta diária de calorias.",
       "label": "Meta diária de calorias"
+    },
+    "country": {
+      "title": "Onde você faz compras?",
+      "subtitle": "A busca de alimentos mostrará primeiro produtos vendidos neste país. A leitura de código de barras funciona no mundo todo. Você pode alterar isso depois no Perfil."
     },
     "units": {
       "title": "Unidades",
@@ -240,6 +266,11 @@
         "one": "Open Food Facts · {{count}} resultado",
         "other": "Open Food Facts · {{count}} resultados"
       },
+      "openFoodFactsResultsInCountry": {
+        "one": "Open Food Facts · {{country}} · {{count}} resultado",
+        "other": "Open Food Facts · {{country}} · {{count}} resultados"
+      },
+      "worldwideFallback": "Nada encontrado em {{country}} — mostrando resultados mundiais",
       "recent": "Recentes",
       "caloriesPer100g": "{{calories}} kcal / 100g",
       "addToMeal": "Adicionar a {{meal}}"
@@ -282,7 +313,9 @@
     "appPreferences": {
       "title": "Preferências do aplicativo",
       "firstDayOfWeek": "Primeiro dia da semana",
-      "language": "Idioma"
+      "language": "Idioma",
+      "country": "País",
+      "countryHint": "Usado para mostrar alimentos vendidos no seu país ao pesquisar. A leitura de código de barras funciona no mundo todo."
     }
   }
 }

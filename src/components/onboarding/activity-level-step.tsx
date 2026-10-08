@@ -14,7 +14,7 @@ export function ActivityLevelStep({ onNext, onBack }: { onNext: () => void; onBa
   return (
     <OnboardingStepShell
       step={3}
-      totalSteps={5}
+      totalSteps={6}
       title={t('onboarding.activityLevel.title')}
       subtitle={t('onboarding.activityLevel.subtitle')}
       onBack={onBack}

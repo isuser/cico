@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { ActivityLevelStep } from '@/components/onboarding/activity-level-step';
 import { CalorieGoalStep } from '@/components/onboarding/calorie-goal-step';
+import { CountryStep } from '@/components/onboarding/country-step';
 import { PersonalInfoStep } from '@/components/onboarding/personal-info-step';
 import { UnitsStep } from '@/components/onboarding/units-step';
 import { WelcomeStep } from '@/components/onboarding/welcome-step';
@@ -9,7 +10,7 @@ import { saveProfile, useDatabase } from '@/db';
 import { useOnboarding } from '@/hooks/onboarding-context';
 import { useProfileGate } from '@/hooks/profile-gate';
 
-const STEP_COUNT = 5;
+const STEP_COUNT = 6;
 
 export function OnboardingWizard() {
   const [stepIndex, setStepIndex] = useState(0);
@@ -36,6 +37,7 @@ export function OnboardingWizard() {
         units: draft.units,
         first_day_of_week: 'monday',
         language: 'en',
+        country: draft.country,
       });
       // Flips the onboarding gate — Stack.Protected then redirects to (tabs) automatically.
       await refresh();
@@ -53,6 +55,8 @@ export function OnboardingWizard() {
       return <ActivityLevelStep onNext={goNext} onBack={goBack} />;
     case 3:
       return <CalorieGoalStep onNext={goNext} onBack={goBack} />;
+    case 4:
+      return <CountryStep onNext={goNext} onBack={goBack} />;
     default:
       return <UnitsStep onFinish={finish} onBack={goBack} saving={saving} />;
   }

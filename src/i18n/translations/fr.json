@@ -26,6 +26,28 @@
     "monday": "Lundi",
     "sunday": "Dimanche"
   },
+  "countries": {
+    "worldwide": "Monde entier",
+    "ar": "Argentine",
+    "au": "Australie",
+    "at": "Autriche",
+    "be": "Belgique",
+    "br": "Brésil",
+    "ca": "Canada",
+    "fr": "France",
+    "de": "Allemagne",
+    "ie": "Irlande",
+    "it": "Italie",
+    "mx": "Mexique",
+    "nl": "Pays-Bas",
+    "pl": "Pologne",
+    "pt": "Portugal",
+    "es": "Espagne",
+    "se": "Suède",
+    "ch": "Suisse",
+    "gb": "Royaume-Uni",
+    "us": "États-Unis"
+  },
   "mealTypes": {
     "breakfast": "Petit-déjeuner",
     "lunch": "Déjeuner",
@@ -129,6 +151,10 @@
       "suggestion": "D'après vos informations, nous suggérons {{suggestion}} kcal/jour (MB × niveau d'activité). Ajustez si vous le souhaitez.",
       "fallbackSubtitle": "Définissez votre objectif calorique quotidien.",
       "label": "Objectif calorique quotidien"
+    },
+    "country": {
+      "title": "Où faites-vous vos courses ?",
+      "subtitle": "La recherche d'aliments affichera d'abord les produits vendus dans ce pays. Le scan de code-barres fonctionne partout dans le monde. Vous pourrez modifier ce choix plus tard dans le Profil."
     },
     "units": {
       "title": "Unités",
@@ -240,6 +266,11 @@
         "one": "Open Food Facts · {{count}} résultat",
         "other": "Open Food Facts · {{count}} résultats"
       },
+      "openFoodFactsResultsInCountry": {
+        "one": "Open Food Facts · {{country}} · {{count}} résultat",
+        "other": "Open Food Facts · {{country}} · {{count}} résultats"
+      },
+      "worldwideFallback": "Rien trouvé pour {{country}} — résultats du monde entier",
       "recent": "Récents",
       "caloriesPer100g": "{{calories}} kcal / 100g",
       "addToMeal": "Ajouter à {{meal}}"
@@ -282,7 +313,9 @@
     "appPreferences": {
       "title": "Préférences de l'application",
       "firstDayOfWeek": "Premier jour de la semaine",
-      "language": "Langue"
+      "language": "Langue",
+      "country": "Pays",
+      "countryHint": "Sert à afficher les aliments vendus dans votre pays lors des recherches. Le scan de code-barres fonctionne partout dans le monde."
     }
   }
 }

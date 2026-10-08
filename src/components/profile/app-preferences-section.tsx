@@ -1,5 +1,6 @@
 import { View } from 'react-native';
 
+import { CountryOptions } from '@/components/country-options';
 import { OptionCard } from '@/components/onboarding/option-card';
 import { SectionCard } from '@/components/profile/section-card';
 import { ThemedText } from '@/components/themed-text';
@@ -55,6 +56,14 @@ export function AppPreferencesSection({
             />
           ))}
         </View>
+      </View>
+
+      <View style={{ gap: Spacing.one }}>
+        <ThemedText type="smallBold">{t('profile.appPreferences.country')}</ThemedText>
+        <ThemedText type="small" themeColor="textSecondary">
+          {t('profile.appPreferences.countryHint')}
+        </ThemedText>
+        <CountryOptions value={profile.country} onChange={(country) => onSave({ country })} />
       </View>
     </SectionCard>
   );

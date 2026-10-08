@@ -1,4 +1,5 @@
 import type { Language } from '@/i18n/types';
+import type { CountryCode } from '@/lib/countries';
 
 export type Gender = 'male' | 'female' | 'other';
 
@@ -31,6 +32,8 @@ export interface Profile {
   units: Units;
   first_day_of_week: DayOfWeek;
   language: Language;
+  /** Localizes Open Food Facts search; null searches worldwide. */
+  country: CountryCode | null;
   created_at: string;
 }
 

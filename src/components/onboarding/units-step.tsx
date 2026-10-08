@@ -26,8 +26,8 @@ export function UnitsStep({
 
   return (
     <OnboardingStepShell
-      step={5}
-      totalSteps={5}
+      step={6}
+      totalSteps={6}
       title={t('onboarding.units.title')}
       subtitle={t('onboarding.units.subtitle')}
       onBack={onBack}

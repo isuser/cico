@@ -36,7 +36,7 @@ export function CalorieGoalStep({ onNext, onBack }: { onNext: () => void; onBack
   return (
     <OnboardingStepShell
       step={4}
-      totalSteps={5}
+      totalSteps={6}
       title={t('onboarding.calorieGoal.title')}
       subtitle={
         suggestion !== null
